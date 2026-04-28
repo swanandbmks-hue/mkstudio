@@ -1,0 +1,109 @@
+{
+  "site": {
+    "name": "MK Studio Pune",
+    "tagline": "Where Stories Come to Life",
+    "description": "Full-service film production, state-of-the-art equipment rental, professional studio facilities — everything a content creator, filmmaker, or brand needs to produce world-class work.",
+    "phone": "+91 98811 92236",
+    "email": "info@mkstudiopune.com",
+    "address": "Pune, Maharashtra, India",
+    "hours": "Mon–Sat: 9:30 AM – 6:30 PM",
+    "founded": "2008",
+    "website": "mkstudiopune.com"
+  },
+  "hero": {
+    "eyebrow": "Pune's Premier Film & Creative Studio — Est. 2008",
+    "title": "Where Stories",
+    "title_accent": "Come to Life",
+    "subtitle": "Full-service film production, state-of-the-art equipment rental, professional studio facilities — everything a content creator, filmmaker, or brand needs to produce world-class work. Based in Pune. Serving India & the Globe.",
+    "cta_primary": "Explore Services",
+    "cta_secondary": "Rent Equipment",
+    "stats": [
+      { "num": "15+", "label": "Years Active" },
+      { "num": "50+", "label": "Productions" },
+      { "num": "200+", "label": "Clients Served" },
+      { "num": "6", "label": "Feature Films" }
+    ]
+  },
+  "services": [
+    {
+      "id": "s1",
+      "icon": "🎬",
+      "color": "blue",
+      "title": "Film Production",
+      "description": "Full-cycle film production for feature films, short films, documentaries, and web series. We handle scripting, casting, shooting, and post-production with seasoned professionals.",
+      "status": "live"
+    },
+    {
+      "id": "s2",
+      "icon": "📷",
+      "color": "teal",
+      "title": "Equipment Rental",
+      "description": "Cinema cameras, DSLR & mirrorless bodies, prime and zoom lenses, lighting rigs, audio gear, and the iconic 12MM Jimmy Crane — on flexible rental plans.",
+      "status": "live"
+    },
+    {
+      "id": "s3",
+      "icon": "🎙️",
+      "color": "green",
+      "title": "Recording Studio",
+      "description": "Professional-grade acoustic recording studio for song recording, voice-overs, podcasts, and audio production with expert sound engineers.",
+      "status": "live"
+    },
+    {
+      "id": "s4",
+      "icon": "✂️",
+      "color": "orange",
+      "title": "Post-Production",
+      "description": "High-end video and audio editing suites, color grading, VFX, and sound dubbing. Our editors bring cinematic polish to your raw footage.",
+      "status": "live"
+    },
+    {
+      "id": "s5",
+      "icon": "🎭",
+      "color": "red",
+      "title": "Casting & Talent",
+      "description": "Artist management, talent promotion, acting workshops, and open auditions. Connect productions with verified talent.",
+      "status": "live"
+    },
+    {
+      "id": "s6",
+      "icon": "📣",
+      "color": "purple",
+      "title": "Film Marketing",
+      "description": "Strategic multi-platform marketing covering digital media, broadcast, radio, and social networks including OTT placement and theatrical distribution.",
+      "status": "live"
+    }
+  ],
+  "equipment": [
+    { "id": "e1", "icon": "🎥", "title": "Video Cameras", "description": "Cinema-grade video cameras for broadcast, documentary, and narrative production.", "image": "", "status": "live" },
+    { "id": "e2", "icon": "📸", "title": "DSLR & Mirrorless", "description": "Full-frame bodies for indie productions, content creators, and music videos.", "image": "", "status": "live" },
+    { "id": "e3", "icon": "🏃", "title": "GoPro & Action Cams", "description": "Rugged action cameras for adventure shoots, sports, and POV content.", "image": "", "status": "live" },
+    { "id": "e4", "icon": "🔭", "title": "Prime & Zoom Lenses", "description": "Cinematic glass including wide-angle, standard zoom, and short telephoto lenses.", "image": "", "status": "live" },
+    { "id": "e5", "icon": "🔧", "title": "Rigs & Grips", "description": "Camera cages, sliders, stabilizers, gimbals, and shoulder rigs.", "image": "", "status": "live" },
+    { "id": "e6", "icon": "💡", "title": "Lighting", "description": "LED panels, fresnel lights, softboxes, and diffusers for pro lighting setups.", "image": "", "status": "live" },
+    { "id": "e7", "icon": "🎤", "title": "Sound Equipment", "description": "Boom mics, lavalier kits, audio recorders, mixers, and wireless systems.", "image": "", "status": "live" },
+    { "id": "e8", "icon": "🏗️", "title": "12MM Jimmy Crane", "description": "Flagship crane rental for sweeping cinematic shots and high-impact productions.", "image": "", "status": "live" }
+  ],
+  "productions": [
+    { "id": "p1", "category": "film", "title": "Yoddha", "year": "2012", "description": "A powerful Marathi feature directed by Sushila Prasad, produced by M.K. Dhumal.", "image": "", "youtube": "https://youtu.be/IjPQDwZq0VU", "status": "live" },
+    { "id": "p2", "category": "film", "title": "Jawani Zindabad", "year": "2019", "description": "Directed by Shiv Kadam, featuring Abhishek Sathe and Ketaki Narayan.", "image": "", "youtube": "https://www.youtube.com/watch?v=Gx9KjE67jRg", "status": "live" },
+    { "id": "p3", "category": "film", "title": "Lagna Mubarak", "year": "2018", "description": "Comedy drama directed by Chetan Chavada and Sagar Pathak.", "image": "", "youtube": "https://www.youtube.com/watch?v=rXBf7FlQY9I", "status": "live" },
+    { "id": "p4", "category": "film", "title": "Sargam", "year": "2016", "description": "Musical drama featuring Dr. Girish Karnad and Yatin Karyekar.", "image": "", "youtube": "https://youtu.be/1hK4T23mv_o", "status": "live" },
+    { "id": "p5", "category": "short", "title": "Zingar", "year": "2021", "description": "Award-nominated short film exploring human resilience.", "image": "", "youtube": "https://www.youtube.com/watch?v=ilUz6FPZOX4", "status": "live" },
+    { "id": "p6", "category": "short", "title": "Bonsai", "year": "2020", "description": "A poetic short about patience, growth, and quiet strength.", "image": "", "youtube": "https://www.youtube.com/watch?v=x1l4VqRz3xU", "status": "live" },
+    { "id": "p7", "category": "web", "title": "Jaya", "year": "2022", "description": "Original web series celebrating women's stories.", "image": "", "youtube": "https://www.youtube.com/watch?v=SIzys9N83CA", "status": "live" },
+    { "id": "p8", "category": "ad", "title": "Indrayani Foods", "year": "2023", "description": "Brand campaign for a beloved Maharashtra food brand.", "image": "", "youtube": "https://www.youtube.com/watch?v=V_Cc8Lbi1Zk", "status": "live" },
+    { "id": "p9", "category": "ad", "title": "Maha Grip", "year": "2023", "description": "High-energy product commercial shoot and post-production.", "image": "", "youtube": "https://www.youtube.com/watch?v=n8mIebqBZfw", "status": "live" }
+  ],
+  "gallery": [],
+  "testimonials": [
+    { "id": "t1", "text": "MK Studio gave our short film the cinematic look we dreamed of but couldn't afford to build ourselves. The equipment was top-notch and the team's support was invaluable on set.", "name": "Rahul Deshmukh", "role": "Independent Filmmaker, Pune", "stars": 5, "status": "live" },
+    { "id": "t2", "text": "Renting the recording studio for our album was seamless. The acoustics are professional-grade and the engineers really understand music. We'll be back for our next project.", "name": "Priya Kulkarni", "role": "Singer-Songwriter, Mumbai", "stars": 5, "status": "live" },
+    { "id": "t3", "text": "We've used MK Studio for three ad film shoots now. The Jimmy Crane rental transformed our client's TV commercial. Highly professional, punctual, and competitively priced.", "name": "Vikram Sharma", "role": "Creative Director, Ad Agency", "stars": 5, "status": "live" }
+  ],
+  "about": {
+    "founder": "Machindra Kisan Dhumal",
+    "story": "In 2008, visionary filmmaker Machindra Kisan Dhumal founded MK Studio with a conviction that cinema is more than entertainment — it's a force for social awareness, cultural expression, and human connection. From producing award-worthy Marathi feature films to equipping independent content creators with cinema-grade tools, MK Studio has grown into Pune's most versatile creative hub.",
+    "mission": "To democratize professional filmmaking and creative production in India — giving every storyteller, regardless of budget, access to world-class tools and expertise."
+  }
+}
