@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MK Studio — Graphics & Image Manager</title>
+<link rel="stylesheet" href="../css/admin.css">
+<style>
+/* ── GRAPHICS PANEL EXTRAS ── */
+:root {
+  --accent:#0071E3; --accent-h:#0077ED; --success:#34C759;
+  --warning:#FF9F0A; --danger:#FF3B30; --bg:#F5F5F7;
+  --white:#fff; --text:#1D1D1F; --sub:#86868B; --border:rgba(0,0,0,0.1);
+  --radius:14px;
+}
+.preview-frame {
+  width:100%; aspect-ratio:16/9; border-radius:12px;
+  overflow:hidden; background:#F0F0F5; border:2px dashed var(--border);
+  display:flex; align-items:center; justify-content:center;
+  position:relative; transition:border-color .2s;
+}
+.preview-frame img, .preview-frame svg { width:100%; height:100%; object-fit:contain; }
+.preview-frame.has-image { border-style:solid; border-color:var(--accent); }
+.preview-frame .preview-label {
+  position:absolute; bottom:10px; left:10px; right:10px;
+  background:rgba(0,0,0,0.6); color:#fff; padding:6px 10px;
+  border-radius:6px; font-size:0.72rem; letter-spacing:.04em;
+  text-align:center;
+}
+
+.img-card {
+  background:var(--white); border-radius:var(--radius);
+  border:1.5px solid var(--border); overflow:hidden;
+  transition:all .25s; cursor:pointer;
+}
+.img-card:hover { border-color:var(--accent); box-shadow:0 8px 30px rgba(0,113,227,0.12); transform:translateY(-3px); }
+.img-card.selected { border-color:var(--accent); box-shadow:0 0 0 3px rgba(0,113,227,0.2); }
+
+.img-thumb {
+  width:100%; aspect-ratio:4/3; overflow:hidden; background:#F5F5F7;
+  display:flex; align-items:center; justify-content:center; position:relative;
+}
+.img-thumb img { width:100%; height:100%; object-fit:contain; padding:8px; transition:transform .3s; }
+.img-card:hover .img-thumb img { transform:scale(1.04); }
+.img-thumb .img-overlay {
+  position:absolute; inset:0; background:rgba(0,113,227,0); 
+  display:flex; align-items:center; justify-content:center;
+  transition:background .25s; gap:8px;
+}
+.img-card:hover .img-overlay { background:rgba(0,113,227,0.12); }
+
+.img-info { padding:12px 14px; }
+.img-info h4 { font-size:0.82rem; font-weight:600; color:var(--text); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.img-info p { font-size:0.72rem; color:var(--sub); }
+
+.img-actions { display:flex; gap:6px; padding:0 14px 14px; }
+.ia-btn { flex:1; padding:7px; border:none; border-radius:7px; font-size:0.72rem; font-weight:600; cursor:pointer; transition:all .2s; font-family:inherit; }
+.ia-preview { background:rgba(0,113,227,0.08); color:var(--accent); }
+.ia-preview:hover { background:var(--accent); color:#fff; }
+.ia-replace { background:rgba(52,199,89,0.08); color:#1a7d34; }
+.ia-replace:hover { background:var(--success); color:#fff; }
+.ia-reset { background:rgba(255,59,48,0.08); color:var(--danger); }
+.ia-reset:hover { background:var(--danger); color:#fff; }
+
+.section-divider {
+  display:flex; align-items:center; gap:14px; margin:30px 0 20px;
+}
+.section-divider h3 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--text); white-space:nowrap; }
+.section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.upload-drop-zone {
+  border:2px dashed rgba(0,113,227,.3); border-radius:var(--radius);
+  padding:36px 24px; text-align:center; cursor:pointer;
+  transition:all .25s; background:rgba(0,113,227,.02); position:relative;
+}
+.upload-drop-zone:hover, .upload-drop-zone.drag-over { border-color:var(--accent); background:rgba(0,113,227,.06); }
+.upload-drop-zone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+.upload-drop-zone .udz-icon { font-size:2.4rem; margin-bottom:10px; }
+.upload-drop-zone .udz-text { font-size:.88rem; color:var(--sub); }
+.upload-drop-zone .udz-text strong { color:var(--accent); }
+.upload-drop-zone .udz-hint { font-size:.73rem; color:rgba(134,134,139,.7); margin-top:5px; }
+
+.svg-editor-wrap {
+  background:#1D1D1F; border-radius:var(--radius); overflow:hidden;
+}
+.svg-editor-toolbar {
+  display:flex; align-items:center; gap:8px; padding:10px 16px;
+  background:#2C2C2E; border-bottom:1px solid rgba(255,255,255,.06);
+  flex-wrap:wrap;
+}
+.svg-editor-toolbar span { font-size:.72rem; color:rgba(255,255,255,.4); letter-spacing:.08em; text-transform:uppercase; }
+.svet-btn { padding:5px 12px; border:none; border-radius:6px; font-size:.75rem; font-weight:600; cursor:pointer; transition:all .2s; font-family:inherit; }
+.svet-apply { background:var(--accent); color:#fff; }
+.svet-apply:hover { background:var(--accent-h); }
+.svet-reset { background:rgba(255,255,255,.08); color:rgba(255,255,255,.7); }
+.svet-reset:hover { background:rgba(255,255,255,.15); color:#fff; }
+#svgCodeEditor {
+  width:100%; min-height:220px; background:#1D1D1F; color:#E8E8ED;
+  border:none; padding:16px; font-family:'SF Mono',Menlo,monospace;
+  font-size:.78rem; line-height:1.6; resize:vertical; outline:none;
+}
+
+.color-strip { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.cs-swatch {
+  width:32px; height:32px; border-radius:8px; cursor:pointer;
+  border:2px solid transparent; transition:all .2s; position:relative;
+}
+.cs-swatch:hover { transform:scale(1.15); }
+.cs-swatch.active { border-color:var(--text); transform:scale(1.1); }
+.cs-swatch .cs-label { position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); font-size:.6rem; color:var(--sub); white-space:nowrap; }
+
+.live-preview-box {
+  background:#F5F5F7; border-radius:var(--radius); padding:24px;
+  border:1px solid var(--border); min-height:160px;
+  display:flex; align-items:center; justify-content:center;
+}
+.live-preview-box img { max-width:100%; max-height:200px; object-fit:contain; }
+
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+
+.tab-bar { display:flex; gap:4px; border-bottom:1px solid var(--border); margin-bottom:24px; }
+.tab-btn {
+  padding:10px 22px; font-size:.82rem; font-weight:600; border:none;
+  background:none; color:var(--sub); cursor:pointer; border-bottom:2px solid transparent;
+  margin-bottom:-1px; transition:all .2s; font-family:inherit;
+}
+.tab-btn.active { color:var(--accent); border-bottom-color:var(--accent); }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+
+.stat-pill {
+  display:inline-flex; align-items:center; gap:6px; padding:6px 14px;
+  background:rgba(0,113,227,.08); border-radius:980px;
+  font-size:.78rem; font-weight:600; color:var(--accent);
+}
+
+/* Lightbox */
+.gfx-lightbox {
+  position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:99999;
+  display:none; align-items:center; justify-content:center;
+}
+.gfx-lightbox.open { display:flex; }
+.gfx-lb-inner { position:relative; max-width:90vw; max-height:90vh; background:#1D1D1F; border-radius:16px; padding:24px; }
+.gfx-lb-inner img { max-width:80vw; max-height:75vh; object-fit:contain; display:block; border-radius:8px; }
+.gfx-lb-close { position:absolute; top:12px; right:16px; background:none; border:none; color:rgba(255,255,255,.5); font-size:1.5rem; cursor:pointer; transition:color .2s; }
+.gfx-lb-close:hover { color:#fff; }
+.gfx-lb-info { margin-top:14px; display:flex; justify-content:space-between; align-items:center; }
+.gfx-lb-name { font-size:.88rem; font-weight:600; color:#fff; }
+.gfx-lb-size { font-size:.75rem; color:rgba(255,255,255,.4); }
+</style>
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-text">MK<span>Studio</span></div>
+    <div class="sidebar-logo-sub">Graphics Manager</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Manage Graphics</div>
+    <button class="nav-item active" data-tab="overview"><span class="nav-icon">🗂️</span><span class="nav-label">All Graphics</span></button>
+    <button class="nav-item" data-tab="hero"><span class="nav-icon">🖼️</span><span class="nav-label">Hero & Background</span></button>
+    <button class="nav-item" data-tab="services"><span class="nav-icon">🎬</span><span class="nav-label">Service Icons</span></button>
+    <button class="nav-item" data-tab="equipment"><span class="nav-icon">📷</span><span class="nav-label">Equipment Images</span></button>
+    <button class="nav-item" data-tab="productions"><span class="nav-icon">🎞️</span><span class="nav-label">Production Thumbnails</span></button>
+    <button class="nav-item" data-tab="logo"><span class="nav-icon">✨</span><span class="nav-label">Logo & Branding</span></button>
+    <button class="nav-item" data-tab="upload"><span class="nav-icon">☁️</span><span class="nav-label">Upload Custom</span></button>
+    <div class="sidebar-section-label">Tools</div>
+    <button class="nav-item" data-tab="editor"><span class="nav-icon">⚙️</span><span class="nav-label">SVG Code Editor</span></button>
+    <button class="nav-item" data-tab="colors"><span class="nav-icon">🎨</span><span class="nav-label">Color Customizer</span></button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-av">MK</div>
+      <div><div class="user-name">MK Studio</div><div class="user-role">Graphics Admin</div></div>
+      <button class="logout-btn" onclick="window.open('../index.html','_blank')" title="Preview site">↗</button>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-title" id="topbarTitle">All Graphics</div>
+    <div class="topbar-actions">
+      <span class="stat-pill" id="totalCount">Loading...</span>
+      <button class="btn-admin btn-preview" onclick="window.open('../index.html','_blank')">↗ Preview Site</button>
+      <button class="btn-admin btn-save" onclick="saveAllChanges()">💾 Save All Changes</button>
+    </div>
+  </header>
+
+  <div class="content" id="mainContent">
+
+    <!-- ══════════════ OVERVIEW ══════════════ -->
+    <div class="tab-content active" id="tab-overview">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;">
+        <div class="stat-card"><div class="stat-card-label">Service Icons</div><div class="stat-card-num">6</div><div class="stat-card-sub">All live</div></div>
+        <div class="stat-card"><div class="stat-card-label">Equipment Images</div><div class="stat-card-num">8</div><div class="stat-card-sub">All live</div></div>
+        <div class="stat-card"><div class="stat-card-label">Production Thumbnails</div><div class="stat-card-num">9</div><div class="stat-card-sub">All live</div></div>
+        <div class="stat-card"><div class="stat-card-label">Branding Assets</div><div class="stat-card-num">3</div><div class="stat-card-sub">Logo, Hero, OG</div></div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>📋 How to Replace Any Graphic</h3></div>
+        <div class="admin-card-body" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+          <div style="padding:20px;background:var(--bg);border-radius:10px;">
+            <div style="font-size:2rem;margin-bottom:10px;">🖼️</div>
+            <h4 style="font-size:.88rem;font-weight:700;margin-bottom:6px;">Option 1 — Upload Photo</h4>
+            <p style="font-size:.8rem;color:var(--sub);line-height:1.6">Click any image card → "Replace" → upload your JPG, PNG or WebP photo. It replaces the graphic instantly on the website.</p>
+          </div>
+          <div style="padding:20px;background:var(--bg);border-radius:10px;">
+            <div style="font-size:2rem;margin-bottom:10px;">⚙️</div>
+            <h4 style="font-size:.88rem;font-weight:700;margin-bottom:6px;">Option 2 — Edit SVG Code</h4>
+            <p style="font-size:.8rem;color:var(--sub);line-height:1.6">Go to SVG Editor tab → select graphic → modify colors, shapes, text → Apply. Great for tweaking existing graphics.</p>
+          </div>
+          <div style="padding:20px;background:var(--bg);border-radius:10px;">
+            <div style="font-size:2rem;margin-bottom:10px;">🎨</div>
+            <h4 style="font-size:.88rem;font-weight:700;margin-bottom:6px;">Option 3 — Color Customizer</h4>
+            <p style="font-size:.8rem;color:var(--sub);line-height:1.6">Go to Color Customizer → change your brand colors → all SVG graphics update automatically to match.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"><h3>All 27 Graphics</h3></div>
+      <div class="grid-4" id="overviewGrid"></div>
+    </div>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <div class="tab-content" id="tab-hero">
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>Hero Background Image</h3><span style="font-size:.78rem;color:var(--sub)">Displayed full-width behind the homepage headline</span></div>
+        <div class="admin-card-body grid-2">
+          <div>
+            <div class="preview-frame has-image" id="heroBgPreview">
+              <img src="../images/svg/hero-bg.svg" alt="Hero Background" id="heroBgImg">
+              <div class="preview-label">hero-bg.svg · 1440×900px</div>
+            </div>
+            <div style="margin-top:16px;display:flex;gap:10px;">
+              <div class="upload-drop-zone" style="flex:1;padding:20px;">
+                <input type="file" accept="image/*,.svg" onchange="replaceGraphic('hero-bg',this)">
+                <div class="udz-icon">📤</div>
+                <div class="udz-text"><strong>Upload new hero image</strong><br>JPG, PNG, WebP, or SVG</div>
+                <div class="udz-hint">Recommended: 1440×900px or wider</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:.82rem;font-weight:700;margin-bottom:12px;">Tips for a great hero background:</h4>
+            <ul style="font-size:.82rem;color:var(--sub);line-height:2;padding-left:16px;">
+              <li>Use a wide, landscape image (1440×900 or bigger)</li>
+              <li>Light/neutral backgrounds work best — text overlays on top</li>
+              <li>Avoid busy patterns near the center — that's where the headline sits</li>
+              <li>Studio shots, equipment close-ups, or behind-the-scenes work great</li>
+              <li>File size: keep under 500KB for fast loading</li>
+            </ul>
+            <div style="margin-top:20px;padding:16px;background:rgba(0,113,227,.06);border-radius:10px;">
+              <p style="font-size:.8rem;color:var(--accent);font-weight:600;margin-bottom:4px;">Current graphic</p>
+              <p style="font-size:.8rem;color:var(--sub)">Animated gradient with film strip, camera aperture, and dot grid — Apple-inspired clean background.</p>
+            </div>
+            <button class="btn-admin btn-danger" style="margin-top:16px;width:100%" onclick="resetGraphic('hero-bg')">↺ Reset to Original SVG</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>OG / Social Share Image</h3><span style="font-size:.78rem;color:var(--sub)">Shown when your site is shared on WhatsApp, Facebook, Twitter</span></div>
+        <div class="admin-card-body grid-2">
+          <div>
+            <div class="preview-frame has-image">
+              <img src="../images/svg/og-image.svg" alt="OG Image" id="ogImg">
+              <div class="preview-label">og-image.svg · 1200×630px</div>
+            </div>
+            <div class="upload-drop-zone" style="margin-top:14px;padding:18px;">
+              <input type="file" accept="image/*,.svg" onchange="replaceGraphic('og-image',this)">
+              <div class="udz-text"><strong>Upload OG image</strong> · 1200×630px recommended</div>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:.82rem;font-weight:700;margin-bottom:12px;">Current OG image shows:</h4>
+            <ul style="font-size:.82rem;color:var(--sub);line-height:2;padding-left:16px;">
+              <li>MK Studio Pune name in large bold text</li>
+              <li>Film strip decoration on left</li>
+              <li>Key stats: 15+ years, 50+ productions, 200+ clients</li>
+              <li>Dark cinematic background with blue glow</li>
+            </ul>
+            <p style="font-size:.8rem;color:var(--sub);margin-top:14px;line-height:1.6">You can replace this with a photo of your studio, your best production still, or keep the designed graphic as-is.</p>
+            <button class="btn-admin btn-danger" style="margin-top:16px;width:100%" onclick="resetGraphic('og-image')">↺ Reset to Original</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ SERVICE ICONS ══════════════ -->
+    <div class="tab-content" id="tab-services">
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>Service Section Icons</h3><span style="font-size:.78rem;color:var(--sub)">6 icons displayed in the Services grid on the homepage</span></div>
+        <div class="admin-card-body">
+          <div class="grid-3" id="serviceIconsGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ EQUIPMENT ══════════════ -->
+    <div class="tab-content" id="tab-equipment">
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>Equipment Card Images</h3><span style="font-size:.78rem;color:var(--sub)">8 illustrated equipment cards — replace with real gear photos</span></div>
+        <div class="admin-card-body">
+          <div style="padding:14px 16px;background:rgba(52,199,89,.08);border-radius:10px;margin-bottom:22px;font-size:.82rem;color:#1a7d34;">
+            💡 <strong>Pro tip:</strong> Replace these SVG illustrations with actual photos of your cameras, lenses, and equipment. Real gear photos dramatically increase rental enquiries!
+          </div>
+          <div class="grid-4" id="equipmentGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ PRODUCTIONS ══════════════ -->
+    <div class="tab-content" id="tab-productions">
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>Production Thumbnail Images</h3><span style="font-size:.78rem;color:var(--sub)">9 film/ad thumbnails — replace with actual movie posters or stills</span></div>
+        <div class="admin-card-body">
+          <div style="padding:14px 16px;background:rgba(0,113,227,.06);border-radius:10px;margin-bottom:22px;font-size:.82rem;color:var(--accent);">
+            🎬 <strong>Tip:</strong> Upload official movie posters, production stills, or promotional images for each film. 16:9 ratio (640×360px) works best.
+          </div>
+          <div class="grid-3" id="productionsGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ LOGO & BRANDING ══════════════ -->
+    <div class="tab-content" id="tab-logo">
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>Logo</h3><span style="font-size:.78rem;color:var(--sub)">Shown in the top navbar on every page</span></div>
+        <div class="admin-card-body grid-2">
+          <div>
+            <div class="preview-frame has-image" style="aspect-ratio:3/1;background:#F8F8FC;">
+              <img src="../images/svg/logo.svg" alt="Logo" id="logoPreviewImg" style="max-height:80px;object-fit:contain;">
+            </div>
+            <div class="upload-drop-zone" style="margin-top:14px;padding:18px;">
+              <input type="file" accept="image/*,.svg" onchange="replaceGraphic('logo',this)">
+              <div class="udz-text"><strong>Upload your logo</strong> · SVG or PNG with transparent background</div>
+              <div class="udz-hint">Recommended height: 36–48px. SVG preferred for crisp display.</div>
+            </div>
+            <button class="btn-admin btn-danger" style="margin-top:10px;width:100%" onclick="resetGraphic('logo')">↺ Reset to Generated Logo</button>
+          </div>
+          <div>
+            <h4 style="font-size:.88rem;font-weight:700;margin-bottom:14px;">Logo Preview on Website</h4>
+            <div style="background:#fff;border-radius:10px;padding:16px;border:1px solid var(--border);margin-bottom:14px;">
+              <div style="height:52px;background:rgba(255,255,255,.72);backdrop-filter:blur(20px);border-radius:8px;display:flex;align-items:center;padding:0 20px;border:1px solid rgba(0,0,0,.06);">
+                <img src="../images/svg/logo.svg" style="height:34px;object-fit:contain;" id="logoNavPreview">
+              </div>
+              <p style="font-size:.72rem;color:var(--sub);margin-top:8px;text-align:center">Navbar preview (light mode)</p>
+            </div>
+            <div style="background:#1D1D1F;border-radius:10px;padding:16px;">
+              <div style="height:52px;background:rgba(29,29,31,.72);backdrop-filter:blur(20px);border-radius:8px;display:flex;align-items:center;padding:0 20px;border:1px solid rgba(255,255,255,.08);">
+                <img src="../images/svg/logo.svg" style="height:34px;object-fit:contain;" id="logoNavDark">
+              </div>
+              <p style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:8px;text-align:center">Navbar preview (scrolled / dark)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>Studio About Image</h3><span style="font-size:.78rem;color:var(--sub)">Displayed in the About section on the homepage</span></div>
+        <div class="admin-card-body grid-2">
+          <div>
+            <div class="preview-frame has-image">
+              <img src="../images/svg/studio-about.svg" alt="Studio About" id="studioAboutImg">
+              <div class="preview-label">studio-about.svg · 600×700px</div>
+            </div>
+            <div class="upload-drop-zone" style="margin-top:14px;padding:18px;">
+              <input type="file" accept="image/*,.svg" onchange="replaceGraphic('studio-about',this)">
+              <div class="udz-text"><strong>Upload studio photo</strong> · Portrait orientation works best</div>
+              <div class="udz-hint">4:5 ratio (e.g. 600×750px). JPG, PNG or WebP.</div>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:.88rem;font-weight:700;margin-bottom:12px;">Best photo ideas for this slot:</h4>
+            <ul style="font-size:.82rem;color:var(--sub);line-height:2.2;padding-left:16px;">
+              <li>Photo of MK Dhumal (the founder)</li>
+              <li>Your studio interior / control room</li>
+              <li>Behind the scenes on a production</li>
+              <li>Team photo</li>
+              <li>Your most iconic camera or equipment setup</li>
+            </ul>
+            <button class="btn-admin btn-danger" style="margin-top:16px;width:100%" onclick="resetGraphic('studio-about')">↺ Reset to Illustration</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ UPLOAD CUSTOM ══════════════ -->
+    <div class="tab-content" id="tab-upload">
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>☁️ Bulk Upload Custom Images</h3></div>
+        <div class="admin-card-body">
+          <div class="upload-drop-zone" id="bulkDropZone" style="padding:60px 40px;">
+            <input type="file" accept="image/*,.svg" multiple id="bulkUploadInput" onchange="handleBulkUpload(this.files)">
+            <div class="udz-icon">📁</div>
+            <div class="upload-text" style="font-size:1rem"><strong>Drag & drop multiple files</strong> or click to browse</div>
+            <div class="udz-hint" style="font-size:.82rem;margin-top:8px">JPG, PNG, WebP, GIF, SVG · Multiple files at once · Max 10MB per file</div>
+          </div>
+
+          <div id="uploadedFilesGrid" style="margin-top:24px;display:none;">
+            <div class="section-divider"><h3>Uploaded Files</h3></div>
+            <div class="grid-4" id="uploadedGrid"></div>
+          </div>
+
+          <div class="section-divider"><h3>Assign Uploaded Images to Website Slots</h3></div>
+          <div style="font-size:.85rem;color:var(--sub);margin-bottom:20px;line-height:1.7">
+            After uploading, click on any uploaded image above and then click "Assign to..." below to place it in a specific section of the website.
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;" id="assignSlots">
+            <!-- Generated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ SVG EDITOR ══════════════ -->
+    <div class="tab-content" id="tab-editor">
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>⚙️ SVG Code Editor</h3><span style="font-size:.78rem;color:var(--sub)">Directly edit any SVG graphic's code</span></div>
+        <div class="admin-card-body">
+          <div class="grid-2" style="align-items:start;gap:28px;">
+            <div>
+              <div class="field-group">
+                <label>Select Graphic to Edit</label>
+                <select id="svgSelectFile" onchange="loadSVGForEdit(this.value)">
+                  <option value="">— Choose a graphic —</option>
+                  <optgroup label="Branding">
+                    <option value="logo">Logo</option>
+                    <option value="hero-bg">Hero Background</option>
+                    <option value="og-image">OG Image</option>
+                    <option value="studio-about">Studio About Image</option>
+                  </optgroup>
+                  <optgroup label="Service Icons">
+                    <option value="icon-film-production">Icon: Film Production</option>
+                    <option value="icon-equipment-rental">Icon: Equipment Rental</option>
+                    <option value="icon-recording-studio">Icon: Recording Studio</option>
+                    <option value="icon-post-production">Icon: Post-Production</option>
+                    <option value="icon-casting-talent">Icon: Casting & Talent</option>
+                    <option value="icon-film-marketing">Icon: Film Marketing</option>
+                  </optgroup>
+                  <optgroup label="Equipment">
+                    <option value="equip-video-camera">Equipment: Video Camera</option>
+                    <option value="equip-dslr-camera">Equipment: DSLR Camera</option>
+                    <option value="equip-gopro">Equipment: GoPro</option>
+                    <option value="equip-lenses">Equipment: Lenses</option>
+                    <option value="equip-rigs-grips">Equipment: Rigs & Grips</option>
+                    <option value="equip-lighting">Equipment: Lighting</option>
+                    <option value="equip-sound-equipment">Equipment: Sound</option>
+                    <option value="equip-jimmy-crane">Equipment: Jimmy Crane</option>
+                  </optgroup>
+                  <optgroup label="Production Thumbnails">
+                    <option value="prod-yoddha">Film: Yoddha</option>
+                    <option value="prod-jawani-zindabad">Film: Jawani Zindabad</option>
+                    <option value="prod-lagna-mubarak">Film: Lagna Mubarak</option>
+                    <option value="prod-sargam">Film: Sargam</option>
+                    <option value="prod-zingar">Short: Zingar</option>
+                    <option value="prod-bonsai">Short: Bonsai</option>
+                    <option value="prod-jaya">Web: Jaya</option>
+                    <option value="prod-indrayani-foods">Ad: Indrayani Foods</option>
+                    <option value="prod-maha-grip">Ad: Maha Grip</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="svg-editor-wrap" id="svgEditorWrap" style="display:none">
+                <div class="svg-editor-toolbar">
+                  <span>SVG Code</span>
+                  <div style="flex:1"></div>
+                  <button class="svet-btn svet-reset" onclick="revertSVGEdit()">↺ Revert</button>
+                  <button class="svet-btn svet-apply" onclick="applySVGEdit()">▶ Apply Preview</button>
+                  <button class="svet-btn svet-apply" style="background:#34C759" onclick="saveSVGEdit()">💾 Save</button>
+                </div>
+                <textarea id="svgCodeEditor" spellcheck="false" placeholder="Select a graphic above to edit its SVG code..."></textarea>
+              </div>
+              <div id="svgEditorPlaceholder" style="background:var(--bg);border-radius:var(--radius);padding:40px;text-align:center;color:var(--sub);">
+                <div style="font-size:3rem;margin-bottom:12px">⚙️</div>
+                <p>Select a graphic from the dropdown to edit its code</p>
+              </div>
+            </div>
+            <div>
+              <label style="display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-bottom:8px;">Live Preview</label>
+              <div class="live-preview-box" id="svgLivePreview">
+                <p style="color:var(--sub);font-size:.85rem">Preview appears here after "Apply Preview"</p>
+              </div>
+              <div id="svgEditorTips" style="margin-top:16px;padding:16px;background:rgba(0,113,227,.05);border-radius:10px;font-size:.8rem;color:var(--sub);line-height:1.8;">
+                <strong style="color:var(--text)">Quick edits you can make:</strong><br>
+                • Change colors: find <code style="background:var(--bg);padding:1px 5px;border-radius:4px">#0071E3</code> and replace with any hex color<br>
+                • Change text: find <code style="background:var(--bg);padding:1px 5px;border-radius:4px">&lt;text</code> tags and edit the content<br>
+                • Change opacity: modify <code style="background:var(--bg);padding:1px 5px;border-radius:4px">opacity="0.x"</code> values<br>
+                • Resize: change <code style="background:var(--bg);padding:1px 5px;border-radius:4px">width</code> and <code style="background:var(--bg);padding:1px 5px;border-radius:4px">height</code> attributes
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ COLOR CUSTOMIZER ══════════════ -->
+    <div class="tab-content" id="tab-colors">
+      <div class="admin-card">
+        <div class="admin-card-header"><h3>🎨 Brand Color Customizer</h3><span style="font-size:.78rem;color:var(--sub)">Change your brand colors — updates all SVG graphics</span></div>
+        <div class="admin-card-body">
+          <div class="grid-2" style="gap:40px;align-items:start">
+            <div>
+              <div class="field-group">
+                <label>Primary Brand Color (currently Apple Blue)</label>
+                <div style="display:flex;gap:10px;align-items:center;margin-top:8px;">
+                  <input type="color" id="primaryColor" value="#0071E3" style="width:56px;height:42px;border:none;border-radius:8px;cursor:pointer;padding:2px;">
+                  <input type="text" id="primaryColorHex" value="#0071E3" style="width:110px;" oninput="syncColor('primary',this.value)">
+                  <span style="font-size:.8rem;color:var(--sub)">Used in: icons, badges, buttons, links</span>
+                </div>
+              </div>
+              <div style="margin-bottom:20px;">
+                <label style="display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-bottom:10px;">Preset Brand Palettes</label>
+                <div class="color-strip">
+                  <div class="cs-swatch active" style="background:#0071E3" onclick="applyPreset('#0071E3','#00C7BE')" title="Apple Blue + Teal"><div class="cs-label">Apple</div></div>
+                  <div class="cs-swatch" style="background:#FF6F00" onclick="applyPreset('#FF6F00','#FFB300')" title="Cinematic Orange"><div class="cs-label">Cinema</div></div>
+                  <div class="cs-swatch" style="background:#C0392B" onclick="applyPreset('#C0392B','#E74C3C')" title="Film Red"><div class="cs-label">Film</div></div>
+                  <div class="cs-swatch" style="background:#1D1D1F" onclick="applyPreset('#1D1D1F','#86868B')" title="Monochrome"><div class="cs-label">Mono</div></div>
+                  <div class="cs-swatch" style="background:#AF52DE" onclick="applyPreset('#AF52DE','#00C7BE')" title="Purple Teal"><div class="cs-label">Royal</div></div>
+                  <div class="cs-swatch" style="background:#34C759" onclick="applyPreset('#34C759','#0071E3')" title="Green Blue"><div class="cs-label">Leaf</div></div>
+                  <div class="cs-swatch" style="background:#FF3B30" onclick="applyPreset('#FF3B30','#FF9F0A')" title="Red Orange"><div class="cs-label">Hot</div></div>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label>Secondary / Accent Color (currently Teal)</label>
+                <div style="display:flex;gap:10px;align-items:center;margin-top:8px;">
+                  <input type="color" id="secondaryColor" value="#00C7BE" style="width:56px;height:42px;border:none;border-radius:8px;cursor:pointer;padding:2px;">
+                  <input type="text" id="secondaryColorHex" value="#00C7BE" style="width:110px;" oninput="syncColor('secondary',this.value)">
+                  <span style="font-size:.8rem;color:var(--sub)">Used in: gradients, hover effects</span>
+                </div>
+              </div>
+
+              <button class="btn-admin btn-save" style="margin-top:20px;width:100%;padding:14px;justify-content:center" onclick="applyColors()">🎨 Apply Colors to All Graphics</button>
+              <p style="font-size:.75rem;color:var(--sub);margin-top:8px;text-align:center">This updates style.css and all SVG color references</p>
+            </div>
+            <div>
+              <label style="display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-bottom:10px;">Color Preview</label>
+              <div id="colorPreviewArea" style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);">
+                <!-- Mini site preview -->
+                <div id="colorPreviewNav" style="height:48px;background:#fff;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;padding:0 20px;gap:16px;">
+                  <div id="cpLogo" style="font-weight:800;font-size:1rem;color:#0071E3;font-family:'Syne',sans-serif">MK<span style="color:#1D1D1F">Studio</span></div>
+                  <div style="flex:1"></div>
+                  <div id="cpBtn" style="background:#0071E3;color:#fff;padding:6px 14px;border-radius:980px;font-size:.72rem;font-weight:600">Get a Quote</div>
+                </div>
+                <div style="padding:28px;background:linear-gradient(135deg,#F5F5F7,#EAEAF0);">
+                  <div id="cpEyebrow" style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#0071E3;font-weight:700;margin-bottom:8px">MK Studio Pune</div>
+                  <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#1D1D1F;line-height:1.1;margin-bottom:12px">Where Stories<br><em style="font-family:'Instrument Serif',serif;font-style:italic;color:#0071E3">Come to Life</em></div>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+                    <div id="cpBtnPrimary" style="background:#0071E3;color:#fff;padding:10px 20px;border-radius:980px;font-size:.78rem;font-weight:600">Explore Services</div>
+                    <div style="background:rgba(0,0,0,.06);color:#1D1D1F;padding:10px 20px;border-radius:980px;font-size:.78rem;font-weight:600">Rent Equipment</div>
+                  </div>
+                  <div style="display:flex;gap:16px">
+                    <div><div id="cpStat" style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:#0071E3">15+</div><div style="font-size:.65rem;color:#86868B;text-transform:uppercase;letter-spacing:.06em">Years</div></div>
+                    <div><div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:#0071E3">50+</div><div style="font-size:.65rem;color:#86868B;text-transform:uppercase;letter-spacing:.06em">Films</div></div>
+                  </div>
+                </div>
+                <div id="cpMarquee" style="background:#1D1D1F;padding:10px 0;text-align:center;font-size:.72rem;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase">Film Production ● Equipment Rental ● Recording Studio ●</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /mainContent -->
+</main>
+
+<!-- LIGHTBOX -->
+<div class="gfx-lightbox" id="gfxLightbox">
+  <div class="gfx-lb-inner">
+    <button class="gfx-lb-close" onclick="closeGfxLightbox()">✕</button>
+    <img id="gfxLbImg" src="" alt="">
+    <div class="gfx-lb-info">
+      <div class="gfx-lb-name" id="gfxLbName"></div>
+      <div class="gfx-lb-size" id="gfxLbSize"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const GRAPHICS = {
+  branding: [
+    {id:'logo',       label:'Logo',              path:'images/svg/logo.svg',         desc:'Navbar logo',           w:200, h:60},
+    {id:'hero-bg',    label:'Hero Background',   path:'images/svg/hero-bg.svg',      desc:'Homepage hero bg',      w:1440,h:900},
+    {id:'og-image',   label:'OG Social Image',   path:'images/svg/og-image.svg',     desc:'Social share image',    w:1200,h:630},
+    {id:'studio-about',label:'About Studio',     path:'images/svg/studio-about.svg', desc:'About section image',   w:600, h:700},
+  ],
+  services: [
+    {id:'icon-film-production',  label:'Film Production',  path:'images/svg/icon-film-production.svg',  desc:'Service icon', w:120,h:120},
+    {id:'icon-equipment-rental', label:'Equipment Rental', path:'images/svg/icon-equipment-rental.svg', desc:'Service icon', w:120,h:120},
+    {id:'icon-recording-studio', label:'Recording Studio', path:'images/svg/icon-recording-studio.svg', desc:'Service icon', w:120,h:120},
+    {id:'icon-post-production',  label:'Post-Production',  path:'images/svg/icon-post-production.svg',  desc:'Service icon', w:120,h:120},
+    {id:'icon-casting-talent',   label:'Casting & Talent', path:'images/svg/icon-casting-talent.svg',   desc:'Service icon', w:120,h:120},
+    {id:'icon-film-marketing',   label:'Film Marketing',   path:'images/svg/icon-film-marketing.svg',   desc:'Service icon', w:120,h:120},
+  ],
+  equipment: [
+    {id:'equip-video-camera',   label:'Video Cameras',    path:'images/svg/equip-video-camera.svg',   desc:'Equipment card', w:400,h:400},
+    {id:'equip-dslr-camera',    label:'DSLR & Mirrorless',path:'images/svg/equip-dslr-camera.svg',    desc:'Equipment card', w:400,h:400},
+    {id:'equip-gopro',          label:'GoPro & Action',   path:'images/svg/equip-gopro.svg',          desc:'Equipment card', w:400,h:400},
+    {id:'equip-lenses',         label:'Prime & Zoom Lenses',path:'images/svg/equip-lenses.svg',       desc:'Equipment card', w:400,h:400},
+    {id:'equip-rigs-grips',     label:'Rigs & Grips',     path:'images/svg/equip-rigs-grips.svg',     desc:'Equipment card', w:400,h:400},
+    {id:'equip-lighting',       label:'Lighting',         path:'images/svg/equip-lighting.svg',       desc:'Equipment card', w:400,h:400},
+    {id:'equip-sound-equipment',label:'Sound Equipment',  path:'images/svg/equip-sound-equipment.svg',desc:'Equipment card', w:400,h:400},
+    {id:'equip-jimmy-crane',    label:'12MM Jimmy Crane', path:'images/svg/equip-jimmy-crane.svg',    desc:'Signature gear', w:400,h:400},
+  ],
+  productions: [
+    {id:'prod-yoddha',          label:'Yoddha',           path:'images/svg/prod-yoddha.svg',          desc:'Feature Film 2012',   w:640,h:360},
+    {id:'prod-jawani-zindabad', label:'Jawani Zindabad',  path:'images/svg/prod-jawani-zindabad.svg', desc:'Feature Film 2019',   w:640,h:360},
+    {id:'prod-lagna-mubarak',   label:'Lagna Mubarak',    path:'images/svg/prod-lagna-mubarak.svg',   desc:'Feature Film 2018',   w:640,h:360},
+    {id:'prod-sargam',          label:'Sargam',           path:'images/svg/prod-sargam.svg',          desc:'Feature Film 2016',   w:640,h:360},
+    {id:'prod-zingar',          label:'Zingar',           path:'images/svg/prod-zingar.svg',          desc:'Short Film 2021',     w:640,h:360},
+    {id:'prod-bonsai',          label:'Bonsai',           path:'images/svg/prod-bonsai.svg',          desc:'Short Film 2020',     w:640,h:360},
+    {id:'prod-jaya',            label:'Jaya',             path:'images/svg/prod-jaya.svg',            desc:'Web Series 2022',     w:640,h:360},
+    {id:'prod-indrayani-foods', label:'Indrayani Foods',  path:'images/svg/prod-indrayani-foods.svg', desc:'Advertisement 2023',  w:640,h:360},
+    {id:'prod-maha-grip',       label:'Maha Grip',        path:'images/svg/prod-maha-grip.svg',       desc:'Advertisement 2023',  w:640,h:360},
+  ]
+};
+
+// custom overrides stored in localStorage
+let overrides = JSON.parse(localStorage.getItem('mkstudio_graphics')||'{}');
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', ()=>{
+  buildOverviewGrid();
+  buildServiceIconsGrid();
+  buildEquipmentGrid();
+  buildProductionsGrid();
+  buildAssignSlots();
+  bindNav();
+  updateTotalCount();
+});
+
+function getImgSrc(id, path) {
+  return overrides[id] || ('../' + path);
+}
+
+// ── NAV ───────────────────────────────────────────────────────────────────────
+function bindNav() {
+  document.querySelectorAll('.nav-item[data-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-'+btn.dataset.tab)?.classList.add('active');
+      document.getElementById('topbarTitle').textContent = btn.querySelector('.nav-label').textContent;
+    });
+  });
+}
+
+// ── BUILD GRIDS ───────────────────────────────────────────────────────────────
+function makeImgCard(g, size='normal') {
+  const src = getImgSrc(g.id, g.path);
+  const isOverridden = !!overrides[g.id];
+  return `
+    <div class="img-card ${isOverridden?'selected':''}" id="card-${g.id}">
+      <div class="img-thumb">
+        <img src="${src}" alt="${g.label}" loading="lazy" id="thumb-${g.id}">
+        <div class="img-overlay">
+          <button class="ia-btn ia-preview" style="flex:0;padding:7px 10px;font-size:.8rem" onclick="previewGraphic('${g.id}','${src}','${g.label}','${g.w}×${g.h}px')">🔍</button>
+        </div>
+      </div>
+      <div class="img-info">
+        <h4>${g.label} ${isOverridden?'<span style="color:var(--success);font-size:.65rem">✓ Custom</span>':''}</h4>
+        <p>${g.desc} · ${g.w}×${g.h}px</p>
+      </div>
+      <div class="img-actions">
+        <label class="ia-btn ia-replace" style="cursor:pointer;text-align:center">
+          📤 Replace
+          <input type="file" accept="image/*,.svg" style="display:none" onchange="replaceGraphic('${g.id}',this)">
+        </label>
+        <button class="ia-btn ia-reset" onclick="resetGraphic('${g.id}')">↺ Reset</button>
+      </div>
+    </div>`;
+}
+
+function buildOverviewGrid() {
+  const all = [...GRAPHICS.branding, ...GRAPHICS.services, ...GRAPHICS.equipment, ...GRAPHICS.productions];
+  document.getElementById('overviewGrid').innerHTML = all.map(g=>makeImgCard(g)).join('');
+}
+function buildServiceIconsGrid() {
+  document.getElementById('serviceIconsGrid').innerHTML = GRAPHICS.services.map(g=>makeImgCard(g)).join('');
+}
+function buildEquipmentGrid() {
+  document.getElementById('equipmentGrid').innerHTML = GRAPHICS.equipment.map(g=>makeImgCard(g)).join('');
+}
+function buildProductionsGrid() {
+  document.getElementById('productionsGrid').innerHTML = GRAPHICS.productions.map(g=>makeImgCard(g)).join('');
+}
+function buildAssignSlots() {
+  const all = [...GRAPHICS.branding,...GRAPHICS.services,...GRAPHICS.equipment,...GRAPHICS.productions];
+  document.getElementById('assignSlots').innerHTML = all.map(g=>`
+    <div style="padding:12px;background:var(--bg);border-radius:10px;display:flex;align-items:center;gap:10px;cursor:pointer;border:1.5px solid var(--border);transition:border-color .2s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'" onclick="triggerAssign('${g.id}')">
+      <img src="${getImgSrc(g.id,g.path)}" style="width:44px;height:44px;object-fit:contain;border-radius:6px;background:#fff;padding:4px;">
+      <div style="min-width:0"><div style="font-size:.78rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.label}</div><div style="font-size:.68rem;color:var(--sub)">${g.desc}</div></div>
+    </div>`).join('');
+}
+
+function updateTotalCount() {
+  const customCount = Object.keys(overrides).length;
+  document.getElementById('totalCount').textContent = `27 graphics · ${customCount} customized`;
+}
+
+// ── REPLACE GRAPHIC ───────────────────────────────────────────────────────────
+function replaceGraphic(id, input) {
+  const file = input.files?.[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const dataUrl = e.target.result;
+    overrides[id] = dataUrl;
+    localStorage.setItem('mkstudio_graphics', JSON.stringify(overrides));
+    // Update all matching images on page
+    document.querySelectorAll(`#thumb-${id}, #${id}Img, #${id}PreviewImg`).forEach(el => el && (el.src = dataUrl));
+    document.querySelectorAll(`img[src*="${id}.svg"]`).forEach(el => el.src = dataUrl);
+    // Mark card as customized
+    const card = document.getElementById(`card-${id}`);
+    if(card) card.classList.add('selected');
+    updateTotalCount();
+    showToast(`✅ "${id}" updated successfully!`, 'success');
+    // Rebuild grids to show "Custom" tag
+    setTimeout(()=>{ buildOverviewGrid(); buildServiceIconsGrid(); buildEquipmentGrid(); buildProductionsGrid(); }, 300);
+  };
+  reader.readAsDataURL(file);
+}
+
+function resetGraphic(id) {
+  if(!confirm(`Reset "${id}" to the original generated graphic?`)) return;
+  delete overrides[id];
+  localStorage.setItem('mkstudio_graphics', JSON.stringify(overrides));
+  document.querySelectorAll(`#thumb-${id}`).forEach(el => {
+    if(el) {
+      const all = [...GRAPHICS.branding,...GRAPHICS.services,...GRAPHICS.equipment,...GRAPHICS.productions];
+      const g = all.find(x=>x.id===id);
+      if(g) el.src = '../' + g.path;
+    }
+  });
+  updateTotalCount();
+  showToast(`↺ "${id}" reset to original`, 'success');
+  setTimeout(()=>{ buildOverviewGrid(); buildServiceIconsGrid(); buildEquipmentGrid(); buildProductionsGrid(); }, 200);
+}
+
+// ── PREVIEW ───────────────────────────────────────────────────────────────────
+function previewGraphic(id, src, label, size) {
+  document.getElementById('gfxLbImg').src = src;
+  document.getElementById('gfxLbName').textContent = label;
+  document.getElementById('gfxLbSize').textContent = size;
+  document.getElementById('gfxLightbox').classList.add('open');
+}
+function closeGfxLightbox() { document.getElementById('gfxLightbox').classList.remove('open'); }
+
+// ── BULK UPLOAD ───────────────────────────────────────────────────────────────
+function handleBulkUpload(files) {
+  const grid = document.getElementById('uploadedGrid');
+  const wrap = document.getElementById('uploadedFilesGrid');
+  wrap.style.display = 'block';
+  Array.from(files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const div = document.createElement('div');
+      div.className = 'img-card';
+      div.innerHTML = `
+        <div class="img-thumb"><img src="${e.target.result}" alt="${file.name}" style="object-fit:contain;padding:8px;"></div>
+        <div class="img-info"><h4>${file.name.substring(0,24)}</h4><p>${(file.size/1024).toFixed(0)}KB</p></div>
+        <div class="img-actions"><button class="ia-btn ia-preview" onclick="previewGraphic('','${e.target.result}','${file.name}','uploaded')">🔍 View</button></div>`;
+      grid.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  });
+  showToast(`✅ ${files.length} file(s) uploaded!`, 'success');
+}
+
+function triggerAssign(id) {
+  const input = document.createElement('input');
+  input.type='file'; input.accept='image/*,.svg';
+  input.onchange = e => replaceGraphic(id, e.target);
+  input.click();
+}
+
+// ── SVG EDITOR ────────────────────────────────────────────────────────────────
+let originalSVGCode = '';
+function loadSVGForEdit(id) {
+  if(!id) return;
+  const all = [...GRAPHICS.branding,...GRAPHICS.services,...GRAPHICS.equipment,...GRAPHICS.productions];
+  const g = all.find(x=>x.id===id);
+  if(!g) return;
+  document.getElementById('svgEditorPlaceholder').style.display='none';
+  document.getElementById('svgEditorWrap').style.display='block';
+  const src = overrides[id] || ('../'+g.path);
+  if(src.startsWith('data:')) {
+    const code = atob(src.split(',')[1]);
+    document.getElementById('svgCodeEditor').value = code;
+    originalSVGCode = code;
+  } else {
+    fetch(src).then(r=>r.text()).then(code=>{
+      document.getElementById('svgCodeEditor').value = code;
+      originalSVGCode = code;
+    }).catch(()=>{
+      document.getElementById('svgCodeEditor').value = `<!-- Could not load ${id}.svg directly in browser -->\n<!-- Enter your SVG code here -->`;
+    });
+  }
+}
+
+function applySVGEdit() {
+  const code = document.getElementById('svgCodeEditor').value;
+  const blob = new Blob([code], {type:'image/svg+xml'});
+  const url = URL.createObjectURL(blob);
+  const preview = document.getElementById('svgLivePreview');
+  preview.innerHTML = `<img src="${url}" style="max-width:100%;max-height:200px;object-fit:contain;">`;
+  showToast('Preview updated!', 'success');
+}
+
+function saveSVGEdit() {
+  const id = document.getElementById('svgSelectFile').value;
+  if(!id) return;
+  const code = document.getElementById('svgCodeEditor').value;
+  const dataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(code)));
+  overrides[id] = dataUrl;
+  localStorage.setItem('mkstudio_graphics', JSON.stringify(overrides));
+  document.querySelectorAll(`#thumb-${id}`).forEach(el => el && (el.src = dataUrl));
+  updateTotalCount();
+  showToast(`💾 "${id}" saved!`, 'success');
+  buildOverviewGrid();
+}
+
+function revertSVGEdit() {
+  document.getElementById('svgCodeEditor').value = originalSVGCode;
+  showToast('Reverted to original', 'success');
+}
+
+// ── COLOR CUSTOMIZER ──────────────────────────────────────────────────────────
+function syncColor(which, val) {
+  if(val.length >= 4) {
+    if(which==='primary') {
+      document.getElementById('primaryColor').value = val;
+      updateColorPreview(val, document.getElementById('secondaryColor').value);
+    } else {
+      document.getElementById('secondaryColor').value = val;
+      updateColorPreview(document.getElementById('primaryColor').value, val);
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.getElementById('primaryColor').addEventListener('input', e=>{
+    document.getElementById('primaryColorHex').value = e.target.value;
+    updateColorPreview(e.target.value, document.getElementById('secondaryColor').value);
+  });
+  document.getElementById('secondaryColor').addEventListener('input', e=>{
+    document.getElementById('secondaryColorHex').value = e.target.value;
+  });
+});
+
+function updateColorPreview(primary, secondary) {
+  const els = {
+    cpLogo: `color:${primary}`,
+    cpBtn: `background:${primary};color:#fff;padding:6px 14px;border-radius:980px;font-size:.72rem;font-weight:600`,
+    cpEyebrow: `font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:${primary};font-weight:700;margin-bottom:8px`,
+    cpBtnPrimary: `background:${primary};color:#fff;padding:10px 20px;border-radius:980px;font-size:.78rem;font-weight:600`,
+    cpStat: `font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:${primary}`,
+  };
+  Object.entries(els).forEach(([id, style])=>{
+    const el = document.getElementById(id);
+    if(el) el.style.cssText = style;
+  });
+  // Update italic accent
+  const heroItalic = document.querySelector('#colorPreviewArea em');
+  if(heroItalic) heroItalic.style.color = primary;
+}
+
+function applyPreset(primary, secondary) {
+  document.getElementById('primaryColor').value = primary;
+  document.getElementById('primaryColorHex').value = primary;
+  document.getElementById('secondaryColor').value = secondary;
+  document.getElementById('secondaryColorHex').value = secondary;
+  document.querySelectorAll('.cs-swatch').forEach(s => s.classList.remove('active'));
+  event.target.closest('.cs-swatch')?.classList.add('active');
+  updateColorPreview(primary, secondary);
+  showToast(`Palette applied — click "Apply Colors" to save`, 'success');
+}
+
+function applyColors() {
+  const primary = document.getElementById('primaryColor').value;
+  const secondary = document.getElementById('secondaryColor').value;
+  // Save to localStorage for the main site to read
+  localStorage.setItem('mkstudio_brand_primary', primary);
+  localStorage.setItem('mkstudio_brand_secondary', secondary);
+  updateColorPreview(primary, secondary);
+  showToast(`✅ Brand colors saved: ${primary} + ${secondary}`, 'success');
+}
+
+// ── SAVE ALL ──────────────────────────────────────────────────────────────────
+function saveAllChanges() {
+  localStorage.setItem('mkstudio_graphics', JSON.stringify(overrides));
+  showToast(`✅ All ${Object.keys(overrides).length} custom graphics saved!`, 'success');
+}
+
+// ── TOAST ──────────────────────────────────────────────────────────────────────
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast ${type} show`;
+  setTimeout(()=>t.className='toast', 3000);
+}
+</script>
+</body>
+</html>

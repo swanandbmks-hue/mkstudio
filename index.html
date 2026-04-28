@@ -1,435 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MK Studio Pune | Film Production & Equipment Rental | India's Creative Hub</title>
-<meta name="description" content="MK Studio Pune – Full-service film studio since 2008. Cinema equipment rental, film production, recording studio, editing & dubbing. Serving filmmakers, content creators, ad makers across India & globally.">
-<meta name="keywords" content="film studio pune, camera rental pune, film production pune, recording studio pune, video production india, equipment rental pune, content creators pune, filmmaker studio pune, DSLR rental pune, jimmy crane pune">
-<meta property="og:title" content="MK Studio Pune | Where Stories Come to Life">
-<meta property="og:description" content="Pune's premier film studio. Equipment rental, production, recording — since 2008.">
-<meta property="og:type" content="website">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<meta name="description" content="MK Studio Pune – Full-service film studio since 2008. Cinema equipment rental, film production, recording studio, editing & dubbing.">
+<meta property="og:image" content="images/svg/og-image.svg">
+<link rel="icon" href="images/svg/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/style.css">
+<style>
+.scroll-progress{position:fixed;top:52px;left:0;height:2px;background:linear-gradient(90deg,#0071E3,#00C7BE);z-index:9001;width:0;transition:width 0.1s}
+.hero{background:none;position:relative}
+.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero>*{position:relative;z-index:1}
+.svc-icon img{width:56px;height:56px;border-radius:14px}
+.equip-card .equip-img{background:transparent;overflow:hidden;border-radius:12px}
+.equip-card .equip-img img{width:100%;height:100%;object-fit:contain;padding:8px}
+.prod-card-media img{width:100%;height:100%;object-fit:cover}
+.about-svg-wrap{border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,113,227,0.12)}
+.about-svg-wrap img{width:100%;display:block}
+.nav-logo-img{height:36px;width:auto}
+.prod-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;background:rgba(255,255,255,0.15);border-radius:50%;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:1.1rem;opacity:0;transition:opacity 0.3s;z-index:3}
+.prod-card:hover .prod-play-btn{opacity:1}
+.gallery-item img{width:100%;height:100%;object-fit:cover}
+</style>
 </head>
 <body>
-
-<!-- ─── MOBILE MENU ─── -->
+<div class="scroll-progress" id="scrollProgress"></div>
 <div class="mobile-nav" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">✕</button>
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#rental">Equipment</a>
-  <a href="#studio">Studio</a>
-  <a href="#productions">Work</a>
-  <a href="#contact">Contact</a>
+  <a href="#about">About</a><a href="#services">Services</a><a href="#rental">Equipment</a>
+  <a href="#studio">Studio</a><a href="#productions">Our Work</a><a href="#gallery">Gallery</a>
 </div>
-
-<!-- ─── NAVBAR ─── -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">MK<span>Studio</span></a>
+    <a href="#" class="nav-logo">
+      <img src="images/svg/logo.svg" alt="MK Studio Pune" class="nav-logo-img" onerror="this.style.display='none';this.nextSibling.style.display='inline'">
+      <span style="display:none">MK<span style="color:#0071E3">Studio</span></span>
+    </a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#rental">Equipment</a></li>
-      <li><a href="#studio">Studio</a></li>
-      <li><a href="#productions">Our Work</a></li>
-      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li><li><a href="#services">Services</a></li>
+      <li><a href="#rental">Equipment</a></li><li><a href="#studio">Studio</a></li>
+      <li><a href="#productions">Our Work</a></li><li><a href="#gallery">Gallery</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Get a Quote</a>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- ─── HERO ─── -->
 <section class="hero" id="home">
+  <img src="images/svg/hero-bg.svg" class="hero-bg-img" alt="" aria-hidden="true">
   <div>
     <p class="eyebrow hero-eyebrow reveal">🎬 Pune's Premier Film & Creative Studio — Est. 2008</p>
-    <h1 class="display-xl hero-title reveal reveal-delay-1">
-      Where Stories<br>
-      <span class="serif">Come to Life</span>
-    </h1>
-    <p class="hero-sub reveal reveal-delay-2">
-      Full-service film production, state-of-the-art equipment rental, professional studio facilities — everything a content creator, filmmaker, or brand needs to produce world-class work. Based in Pune. Serving India &amp; the Globe.
-    </p>
+    <h1 class="display-xl hero-title reveal reveal-delay-1">Where Stories<br><span class="serif">Come to Life</span></h1>
+    <p class="hero-sub reveal reveal-delay-2">Full-service film production, state-of-the-art equipment rental, professional studio facilities — everything a content creator, filmmaker, or brand needs to produce world-class work. Based in Pune. Serving India &amp; the Globe.</p>
     <div class="hero-actions reveal reveal-delay-3">
       <a href="#services" class="btn btn-primary btn-lg">Explore Services</a>
       <a href="#rental" class="btn btn-secondary btn-lg">Rent Equipment</a>
     </div>
-    <div class="hero-stats-row reveal" id="heroStats">
-      <div class="h-stat">
-        <div class="h-stat-num">15+</div>
-        <div class="h-stat-label">Years Active</div>
-      </div>
-      <div class="h-stat">
-        <div class="h-stat-num">50+</div>
-        <div class="h-stat-label">Productions</div>
-      </div>
-      <div class="h-stat">
-        <div class="h-stat-num">200+</div>
-        <div class="h-stat-label">Clients Served</div>
-      </div>
-      <div class="h-stat">
-        <div class="h-stat-num">6</div>
-        <div class="h-stat-label">Feature Films</div>
-      </div>
+    <div class="hero-stats-row reveal">
+      <div class="h-stat"><div class="h-stat-num">15+</div><div class="h-stat-label">Years Active</div></div>
+      <div class="h-stat"><div class="h-stat-num">50+</div><div class="h-stat-label">Productions</div></div>
+      <div class="h-stat"><div class="h-stat-num">200+</div><div class="h-stat-label">Clients Served</div></div>
+      <div class="h-stat"><div class="h-stat-num">6</div><div class="h-stat-label">Feature Films</div></div>
     </div>
   </div>
 </section>
 
-<!-- ─── MARQUEE ─── -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item">Film Production</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Equipment Rental</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Recording Studio</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Video Editing</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Sound Dubbing</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">12MM Jimmy Crane</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Cinema Cameras</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Lighting Rigs</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Short Films</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Ad Films</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Web Series</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Color Grading</span><span class="marquee-item marquee-dot">●</span>
-    <!-- duplicate for seamless loop -->
-    <span class="marquee-item">Film Production</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Equipment Rental</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Recording Studio</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Video Editing</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Sound Dubbing</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">12MM Jimmy Crane</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Cinema Cameras</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Lighting Rigs</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Short Films</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Ad Films</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Web Series</span><span class="marquee-item marquee-dot">●</span>
-    <span class="marquee-item">Color Grading</span><span class="marquee-item marquee-dot">●</span>
-  </div>
-</div>
+<div class="marquee-wrap"><div class="marquee-track">
+  <span class="marquee-item">Film Production</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Equipment Rental</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Recording Studio</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">12MM Jimmy Crane</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Cinema Cameras</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Sound Dubbing</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Color Grading</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Ad Films</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Web Series</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Film Production</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Equipment Rental</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Recording Studio</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">12MM Jimmy Crane</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Cinema Cameras</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Sound Dubbing</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Color Grading</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Ad Films</span><span class="marquee-item marquee-dot">●</span>
+  <span class="marquee-item">Web Series</span><span class="marquee-item marquee-dot">●</span>
+</div></div>
 
-<!-- ─── ABOUT ─── -->
-<section class="section section-alt" id="about">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-      <div>
-        <p class="eyebrow reveal">Our Story</p>
-        <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 20px;">Born From a Belief in Cinema's Power</h2>
-        <p class="body-lg reveal reveal-delay-2" style="margin-bottom:20px;">
-          In 2008, visionary filmmaker <strong style="color:#1D1D1F;">Machindra Kisan Dhumal</strong> founded MK Studio with a conviction that cinema is more than entertainment — it's a force for social awareness, cultural expression, and human connection.
-        </p>
-        <p style="font-size:0.95rem;color:#86868B;line-height:1.75;margin-bottom:36px;" class="reveal reveal-delay-3">
-          From producing award-worthy Marathi feature films to equipping independent content creators with cinema-grade tools, MK Studio has grown into Pune's most versatile creative hub. Whether you're shooting your first YouTube series or your tenth feature film, we have the space, gear, and expertise to make it exceptional.
-        </p>
-        <div style="display:flex;gap:36px;flex-wrap:wrap;" class="reveal">
-          <div><div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:700;color:#0071E3;letter-spacing:-0.03em;">6+</div><div style="font-size:0.72rem;color:#86868B;text-transform:uppercase;letter-spacing:0.06em;">Feature Films</div></div>
-          <div><div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:700;color:#0071E3;letter-spacing:-0.03em;">10+</div><div style="font-size:0.72rem;color:#86868B;text-transform:uppercase;letter-spacing:0.06em;">Short Films</div></div>
-          <div><div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:700;color:#0071E3;letter-spacing:-0.03em;">3+</div><div style="font-size:0.72rem;color:#86868B;text-transform:uppercase;letter-spacing:0.06em;">Web Series</div></div>
+<section class="section section-alt" id="about"><div class="container">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+    <div>
+      <p class="eyebrow reveal">Our Story</p>
+      <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 20px">Born From a Belief in Cinema's Power</h2>
+      <p class="body-lg reveal reveal-delay-2" style="margin-bottom:20px">In 2008, visionary filmmaker <strong style="color:#1D1D1F">Machindra Kisan Dhumal</strong> founded MK Studio with a conviction that cinema is more than entertainment — it's a force for social awareness, cultural expression, and human connection.</p>
+      <p style="font-size:.95rem;color:#86868B;line-height:1.75;margin-bottom:36px" class="reveal reveal-delay-3">From producing award-worthy Marathi feature films to equipping independent content creators with cinema-grade tools, MK Studio has grown into Pune's most versatile creative hub.</p>
+      <div style="display:flex;gap:36px;flex-wrap:wrap" class="reveal">
+        <div><div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:700;color:#0071E3;letter-spacing:-.03em">6+</div><div style="font-size:.72rem;color:#86868B;text-transform:uppercase;letter-spacing:.06em">Feature Films</div></div>
+        <div><div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:700;color:#0071E3;letter-spacing:-.03em">10+</div><div style="font-size:.72rem;color:#86868B;text-transform:uppercase;letter-spacing:.06em">Short Films</div></div>
+        <div><div style="font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:700;color:#0071E3;letter-spacing:-.03em">3+</div><div style="font-size:.72rem;color:#86868B;text-transform:uppercase;letter-spacing:.06em">Web Series</div></div>
+      </div>
+      <a href="#services" class="btn btn-primary reveal" style="margin-top:36px">Discover Our Services</a>
+    </div>
+    <div class="reveal about-svg-wrap"><img src="images/svg/studio-about.svg" alt="MK Studio Pune"></div>
+  </div>
+</div></section>
+
+<section class="section" id="services"><div class="container">
+  <p class="eyebrow reveal">What We Do</p>
+  <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px">End-to-End Creative Services</h2>
+  <p class="body-lg reveal reveal-delay-2" style="max-width:520px;margin-bottom:0">From pre-production to distribution — every stage of your creative journey, under one roof in Pune.</p>
+  <div class="services-grid">
+    <div class="svc-card reveal"><div class="svc-icon"><img src="images/svg/icon-film-production.svg" alt="Film Production"></div><h3>Film Production</h3><p>Full-cycle production for feature films, short films, documentaries, and web series. Scripts, casting, shoot, post — all handled.</p><a href="#contact" class="svc-link">Learn More →</a></div>
+    <div class="svc-card reveal reveal-delay-1"><div class="svc-icon"><img src="images/svg/icon-equipment-rental.svg" alt="Equipment Rental"></div><h3>Equipment Rental</h3><p>Cinema cameras, DSLR & mirrorless, lenses, lighting rigs, audio gear, and the iconic 12MM Jimmy Crane on flexible plans.</p><a href="#rental" class="svc-link">See All Gear →</a></div>
+    <div class="svc-card reveal reveal-delay-2"><div class="svc-icon"><img src="images/svg/icon-recording-studio.svg" alt="Recording Studio"></div><h3>Recording Studio</h3><p>Professional-grade acoustic studio for song recording, voice-overs, podcasts, and audio production with expert engineers.</p><a href="#contact" class="svc-link">Book Studio →</a></div>
+    <div class="svc-card reveal"><div class="svc-icon"><img src="images/svg/icon-post-production.svg" alt="Post Production"></div><h3>Post-Production</h3><p>High-end editing suites, color grading, VFX, and sound dubbing to give your content a cinematic polish.</p><a href="#contact" class="svc-link">Learn More →</a></div>
+    <div class="svc-card reveal reveal-delay-1"><div class="svc-icon"><img src="images/svg/icon-casting-talent.svg" alt="Casting"></div><h3>Casting & Talent</h3><p>Artist management, acting workshops, and open auditions connecting productions with verified talent across Maharashtra.</p><a href="#contact" class="svc-link">Find Talent →</a></div>
+    <div class="svc-card reveal reveal-delay-2"><div class="svc-icon"><img src="images/svg/icon-film-marketing.svg" alt="Film Marketing"></div><h3>Film Marketing</h3><p>Multi-platform strategy including digital, broadcast, OTT placement, theatrical distribution, and brand partnerships.</p><a href="#contact" class="svc-link">Get Reach →</a></div>
+  </div>
+</div></section>
+
+<section class="section section-alt" id="rental"><div class="container">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:16px">
+    <div>
+      <p class="eyebrow reveal">Gear Up</p>
+      <h2 class="display-lg reveal reveal-delay-1" style="margin-top:14px">World-Class Gear, Pune Rates</h2>
+      <p class="body-lg reveal reveal-delay-2" style="max-width:480px;margin-top:12px">Professional cinema equipment — hourly, daily, or project-based. Available Mon–Sat.</p>
+    </div>
+    <a href="#contact" class="btn btn-primary reveal">Request a Quote</a>
+  </div>
+  <div class="equip-grid">
+    <div class="equip-card reveal"><div class="equip-img"><img src="images/svg/equip-video-camera.svg" alt="Video Cameras"></div><h4>Video Cameras</h4><p>Cinema-grade bodies for broadcast and narrative production.</p><span class="equip-badge">Rental Available</span></div>
+    <div class="equip-card reveal reveal-delay-1"><div class="equip-img"><img src="images/svg/equip-dslr-camera.svg" alt="DSLR Mirrorless"></div><h4>DSLR & Mirrorless</h4><p>Full-frame bodies for indie productions and content creators.</p><span class="equip-badge">Rental Available</span></div>
+    <div class="equip-card reveal reveal-delay-2"><div class="equip-img"><img src="images/svg/equip-gopro.svg" alt="GoPro"></div><h4>GoPro & Action Cams</h4><p>Rugged cameras for adventure shoots and POV content.</p><span class="equip-badge">Rental Available</span></div>
+    <div class="equip-card reveal reveal-delay-3"><div class="equip-img"><img src="images/svg/equip-lenses.svg" alt="Lenses"></div><h4>Prime & Zoom Lenses</h4><p>Wide-angle, standard zoom, and telephoto cinematic glass.</p><span class="equip-badge">Rental Available</span></div>
+    <div class="equip-card reveal"><div class="equip-img"><img src="images/svg/equip-rigs-grips.svg" alt="Rigs"></div><h4>Rigs & Grips</h4><p>Camera cages, sliders, gimbals, and shoulder rigs.</p><span class="equip-badge">Rental Available</span></div>
+    <div class="equip-card reveal reveal-delay-1"><div class="equip-img"><img src="images/svg/equip-lighting.svg" alt="Lighting"></div><h4>Lighting</h4><p>LED panels, fresnel lights, softboxes, and reflectors.</p><span class="equip-badge">Rental Available</span></div>
+    <div class="equip-card reveal reveal-delay-2"><div class="equip-img"><img src="images/svg/equip-sound-equipment.svg" alt="Sound"></div><h4>Sound Equipment</h4><p>Boom mics, lavalier kits, mixers, and wireless systems.</p><span class="equip-badge">Rental Available</span></div>
+    <div class="equip-card reveal reveal-delay-3" style="border-color:rgba(0,113,227,.3);background:linear-gradient(135deg,#F0F7FF,#E8F2FF)"><div class="equip-img"><img src="images/svg/equip-jimmy-crane.svg" alt="Jimmy Crane"></div><h4>12MM Jimmy Crane</h4><p>Flagship crane for sweeping cinematic shots.</p><span class="equip-badge" style="background:rgba(0,113,227,.15)">Signature Gear</span></div>
+  </div>
+  <div class="reveal" style="margin-top:40px;background:white;border-radius:18px;padding:36px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;box-shadow:0 4px 24px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.06)">
+    <div><h3 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:#1D1D1F;margin-bottom:6px">Need a Technician On-Set?</h3><p style="font-size:.9rem;color:#86868B">Experienced camera operators, sound recordists, and lighting technicians available with every rental.</p></div>
+    <a href="#contact" class="btn btn-primary">Hire a Technician</a>
+  </div>
+</div></section>
+
+<section class="section" id="studio"><div class="container">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start">
+    <div>
+      <p class="eyebrow reveal">Our Facilities</p>
+      <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px">Studio Built for Creators</h2>
+      <p class="body-lg reveal reveal-delay-2">State-of-the-art infrastructure for every aspect of audio-visual production.</p>
+      <div class="studio-feature-list" style="margin-top:36px">
+        <div class="sf-item reveal"><div class="sf-item-icon">🎵</div><h4>Song Recording</h4><p>Acoustically treated studio. Book by the hour for music, vocals, and scores.</p></div>
+        <div class="sf-item reveal reveal-delay-1"><div class="sf-item-icon">✂️</div><h4>Video Editing Suite</h4><p>Premiere Pro, DaVinci Resolve, Final Cut Pro workstations.</p></div>
+        <div class="sf-item reveal"><div class="sf-item-icon">🎚️</div><h4>Sound Dubbing</h4><p>Professional ADR and dubbing for dialogue replacement.</p></div>
+        <div class="sf-item reveal reveal-delay-1"><div class="sf-item-icon">🎨</div><h4>Color Grading</h4><p>Calibrated color suite for cinematic-grade film delivery.</p></div>
+        <div class="sf-item reveal"><div class="sf-item-icon">🟩</div><h4>Green Screen Stage</h4><p>Chroma key stage for VFX and virtual backgrounds.</p></div>
+        <div class="sf-item reveal reveal-delay-1"><div class="sf-item-icon">📡</div><h4>Live Streaming</h4><p>Multi-camera live streaming for events and digital releases.</p></div>
+      </div>
+    </div>
+    <div class="reveal" style="background:linear-gradient(135deg,#1D1D1F,#2C2C2E);border-radius:24px;padding:48px 36px;color:white;text-align:center">
+      <div style="font-size:5rem;margin-bottom:20px;opacity:.7">🎙️</div>
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:8px">MK Recording Studio</h3>
+      <p style="color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:32px">Pune, Maharashtra, India</p>
+      <div style="background:rgba(255,255,255,.07);border-radius:14px;padding:22px;margin-bottom:16px;text-align:left"><div style="font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">Studio Hours</div><div style="font-size:1.05rem;font-weight:500">Mon–Sat: 9:30 AM–6:30 PM</div><div style="font-size:.82rem;color:rgba(255,255,255,.4);margin-top:4px">Sunday Closed · Advance Booking Required</div></div>
+      <div style="background:rgba(255,255,255,.07);border-radius:14px;padding:22px;text-align:left;margin-bottom:24px"><div style="font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">Phone / WhatsApp</div><div style="font-size:1.1rem;font-weight:600;color:#0071E3">+91 98811 92236</div></div>
+      <a href="#contact" class="btn btn-white" style="width:100%;justify-content:center">Reserve Your Slot</a>
+    </div>
+  </div>
+</div></section>
+
+<section class="section section-alt" id="audience"><div class="container">
+  <p class="eyebrow reveal">Who We Serve</p>
+  <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px">Built for Every Creator</h2>
+  <p class="body-lg reveal reveal-delay-2" style="max-width:520px">Whether you're a solo YouTuber or a seasoned feature filmmaker, our services scale with your ambition.</p>
+  <div class="audience-strip" style="margin-top:50px">
+    <div class="aud-card reveal"><span class="aud-emoji">📱</span><h4>Content Creators</h4><p>Upgrade your production value with cinema cameras, pro lighting, and sound.</p></div>
+    <div class="aud-card reveal reveal-delay-1"><span class="aud-emoji">🎸</span><h4>Individual Artists</h4><p>Record your music, shoot your music videos, build a professional portfolio.</p></div>
+    <div class="aud-card reveal reveal-delay-2"><span class="aud-emoji">🎬</span><h4>Filmmakers</h4><p>From indie short to full feature — studio, crew, and equipment at every stage.</p></div>
+    <div class="aud-card reveal reveal-delay-3"><span class="aud-emoji">🎞️</span><h4>Video Producers</h4><p>Corporate films, event coverage, brand stories — crew, gear, studio space.</p></div>
+    <div class="aud-card reveal"><span class="aud-emoji">📣</span><h4>Ad Makers</h4><p>High-impact TVC and digital ad production for agencies and brands.</p></div>
+  </div>
+</div></section>
+
+<section class="section" id="productions"><div class="container">
+  <p class="eyebrow reveal">Our Work</p>
+  <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px">Stories We've Told</h2>
+  <p class="body-lg reveal reveal-delay-2" style="max-width:520px;margin-bottom:36px">Marathi feature films, short films, web series, and advertisements — click any to watch.</p>
+  <div class="prod-filter reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="film">Feature Films</button>
+    <button class="filter-btn" data-filter="short">Short Films</button>
+    <button class="filter-btn" data-filter="web">Web Series</button>
+    <button class="filter-btn" data-filter="ad">Advertisements</button>
+  </div>
+  <div class="prod-grid" id="prodGrid">
+    <div class="prod-card reveal" data-cat="film" onclick="openYT('https://youtu.be/IjPQDwZq0VU')"><div class="prod-card-media"><img src="images/svg/prod-yoddha.svg" alt="Yoddha"></div><div class="prod-overlay"></div><div class="prod-play-btn">▶</div><div class="prod-info"><div class="prod-type">Feature Film</div><div class="prod-title">Yoddha</div><div class="prod-year">2012</div></div></div>
+    <div class="prod-card reveal reveal-delay-1" data-cat="film" onclick="openYT('https://www.youtube.com/watch?v=Gx9KjE67jRg')"><div class="prod-card-media"><img src="images/svg/prod-jawani-zindabad.svg" alt="Jawani Zindabad"></div><div class="prod-overlay"></div><div class="prod-play-btn">▶</div><div class="prod-info"><div class="prod-type">Feature Film</div><div class="prod-title">Jawani Zindabad</div><div class="prod-year">2019</div></div></div>
+    <div class="prod-card reveal reveal-delay-2" data-cat="film" onclick="openYT('https://www.youtube.com/watch?v=rXBf7FlQY9I')"><div class="prod-card-media"><img src="images/svg/prod-lagna-mubarak.svg" alt="Lagna Mubarak"></div><div class="prod-overlay"></div><div class="prod-play-btn">▶</div><div class="prod-info"><div class="prod-type">Feature Film</div><div class="prod-title">Lagna Mubarak</div><div class="prod-year">2018</div></div></div>
+    <div class="prod-card reveal" data-cat="film" onclick="openYT('https://youtu.be/1hK4T23mv_o')"><div class="prod-card-media"><img src="images/svg/prod-sargam.svg" alt="Sargam"></div><div class="prod-overlay"></div><div class="prod-play-btn">▶</div><div class="prod-info"><div class="prod-type">Feature Film</div><div class="prod-title">Sargam</div><div class="prod-year">2016</div></div></div>
+    <div class="prod-card reveal reveal-delay-1" data-cat="short" onclick="openYT('https://www.youtube.com/watch?v=ilUz6FPZOX4')"><div class="prod-card-media"><img src="images/svg/prod-zingar.svg" alt="Zingar"></div><div class="prod-overlay"></div><div class="prod-play-btn">▶</div><div class="prod-info"><div class="prod-type">Short Film</div><div class="prod-title">Zingar</div><div class="prod-year">2021</div></div></div>
+    <div class="prod-card reveal reveal-delay-2" data-cat="short" onclick="openYT('https://www.youtube.com/watch?v=x1l4VqRz3xU')"><div class="prod-card-media"><img src="images/svg/prod-bonsai.svg" alt="Bonsai"></div><div class="prod-overlay"></div><div class="prod-play-btn">▶</div><div class="prod-info"><div class="prod-type">Short Film</div><div class="prod-title">Bonsai</div><div class="prod-year">2020</div></div></div>
+    <div class="prod-card reveal" data-cat="web" onclick="openYT('https://www.youtube.com/watch?v=SIzys9N83CA')"><div class="prod-card-media"><img src="images/svg/prod-jaya.svg" alt="Jaya"></div><div class="prod-overlay"></div><div class="prod-play-btn">▶</div><div class="prod-info"><div class="prod-type">Web Series</div><div class="prod-title">Jaya</div><div class="prod-year">2022</div></div></div>
+    <div class="prod-card reveal reveal-delay-1" data-cat="ad" onclick="openYT('https://www.youtube.com/watch?v=V_Cc8Lbi1Zk')"><div class="prod-card-media"><img src="images/svg/prod-indrayani-foods.svg" alt="Indrayani Foods"></div><div class="prod-overlay"></div><div class="prod-play-btn">▶</div><div class="prod-info"><div class="prod-type">Advertisement</div><div class="prod-title">Indrayani Foods</div><div class="prod-year">2023</div></div></div>
+    <div class="prod-card reveal reveal-delay-2" data-cat="ad" onclick="openYT('https://www.youtube.com/watch?v=n8mIebqBZfw')"><div class="prod-card-media"><img src="images/svg/prod-maha-grip.svg" alt="Maha Grip"></div><div class="prod-overlay"></div><div class="prod-play-btn">▶</div><div class="prod-info"><div class="prod-type">Advertisement</div><div class="prod-title">Maha Grip</div><div class="prod-year">2023</div></div></div>
+  </div>
+</div></section>
+
+<section class="section section-alt" id="gallery"><div class="container">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:50px">
+    <div><p class="eyebrow reveal">Gallery</p><h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 0">Behind the Lens</h2><p class="body-lg reveal reveal-delay-2" style="max-width:520px;margin-top:12px">Photos and video clips from our productions, studio, and equipment.</p></div>
+    <a href="admin/index.html" class="btn btn-ghost reveal">+ Manage Gallery</a>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-item wide" onclick="openLightbox('images/svg/equip-jimmy-crane.svg','image')"><div class="gallery-img"><img src="images/svg/equip-jimmy-crane.svg" alt="Jimmy Crane" style="object-fit:contain;background:#EEF4FF;padding:16px"></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
+    <div class="gallery-item tall" onclick="openLightbox('images/svg/equip-video-camera.svg','image')"><div class="gallery-img"><img src="images/svg/equip-video-camera.svg" alt="Camera" style="object-fit:contain;background:#EEF8FF;padding:16px"></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
+    <div class="gallery-item" onclick="openLightbox('images/svg/equip-lighting.svg','image')"><div class="gallery-img"><img src="images/svg/equip-lighting.svg" alt="Lighting" style="object-fit:contain;background:#FFF7EE;padding:16px"></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
+    <div class="gallery-item" onclick="openLightbox('images/svg/equip-sound-equipment.svg','image')"><div class="gallery-img"><img src="images/svg/equip-sound-equipment.svg" alt="Sound" style="object-fit:contain;background:#EEFFF6;padding:16px"></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
+    <div class="gallery-item wide" onclick="openLightbox('images/svg/equip-lenses.svg','image')"><div class="gallery-img"><img src="images/svg/equip-lenses.svg" alt="Lenses" style="object-fit:contain;background:#F5EEFF;padding:16px"></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
+    <div class="gallery-item" onclick="openLightbox('images/svg/equip-rigs-grips.svg','image')"><div class="gallery-img"><img src="images/svg/equip-rigs-grips.svg" alt="Rigs" style="object-fit:contain;background:#FFF0EE;padding:16px"></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
+  </div>
+  <p style="text-align:center;margin-top:24px;font-size:.85rem;color:#86868B" class="reveal">Replace with your real studio photos via the <a href="admin/index.html" style="color:#0071E3;font-weight:500">Admin Panel →</a></p>
+</div></section>
+
+<section class="section" id="testimonials"><div class="container">
+  <p class="eyebrow reveal">What Clients Say</p>
+  <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 0">Trusted by Creators</h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal"><div class="stars">★★★★★</div><p class="testi-text">"MK Studio gave our short film the cinematic look we dreamed of. Top-notch equipment and invaluable on-set support."</p><div class="testi-author"><div class="testi-av">R</div><div><div class="testi-name">Rahul Deshmukh</div><div class="testi-role">Filmmaker, Pune</div></div></div></div>
+    <div class="testi-card reveal reveal-delay-1"><div class="stars">★★★★★</div><p class="testi-text">"Renting the recording studio was seamless. Professional-grade acoustics and engineers who understand music. We'll be back."</p><div class="testi-author"><div class="testi-av">P</div><div><div class="testi-name">Priya Kulkarni</div><div class="testi-role">Singer-Songwriter, Mumbai</div></div></div></div>
+    <div class="testi-card reveal reveal-delay-2"><div class="stars">★★★★★</div><p class="testi-text">"Three ad film shoots at MK Studio. The Jimmy Crane rental transformed our client's TVC. Professional, punctual, fairly priced."</p><div class="testi-author"><div class="testi-av">V</div><div><div class="testi-name">Vikram Sharma</div><div class="testi-role">Creative Director, Ad Agency</div></div></div></div>
+  </div>
+</div></section>
+
+<section class="section section-alt" id="contact"><div class="container">
+  <div class="contact-wrap">
+    <div>
+      <p class="eyebrow reveal">Get In Touch</p>
+      <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px">Let's Create Something Extraordinary</h2>
+      <p class="body-lg reveal reveal-delay-2" style="margin-bottom:50px">Have a project? Need equipment? Want to book a studio session?</p>
+      <div class="contact-detail-item reveal"><div class="cd-icon">📞</div><div><div class="cd-label">Phone / WhatsApp</div><div class="cd-value">+91 98811 92236</div></div></div>
+      <div class="contact-detail-item reveal"><div class="cd-icon">✉️</div><div><div class="cd-label">Email</div><div class="cd-value">info@mkstudiopune.com</div></div></div>
+      <div class="contact-detail-item reveal"><div class="cd-icon">📍</div><div><div class="cd-label">Location</div><div class="cd-value">Pune, Maharashtra, India</div></div></div>
+      <div class="contact-detail-item reveal"><div class="cd-icon">🕐</div><div><div class="cd-label">Studio Hours</div><div class="cd-value">Mon–Sat: 9:30 AM–6:30 PM<br><span style="font-size:.82rem;color:#86868B">Sunday Closed</span></div></div></div>
+    </div>
+    <div class="contact-form reveal">
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:28px">Send Us a Message</h3>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your Name" required></div>
+          <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
         </div>
-      </div>
-      <div class="reveal">
-        <div style="background:linear-gradient(135deg,#F5F5F7,#E8E8ED);border-radius:24px;aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;overflow:hidden;">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(0,113,227,0.06),transparent 60%);"></div>
-          <div style="font-size:6rem;opacity:0.3;position:relative;">🎥</div>
-          <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.1em;color:#86868B;text-transform:uppercase;position:relative;">MK Studio · Pune</div>
-          <div style="position:absolute;bottom:0;left:0;right:0;padding:28px;background:linear-gradient(to top,rgba(0,0,0,0.04),transparent);">
-            <div style="background:white;border-radius:14px;padding:18px 22px;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
-              <div style="font-size:0.7rem;color:#86868B;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Founded</div>
-              <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;color:#0071E3;">2008</div>
-              <div style="font-size:0.8rem;color:#86868B;">Pune, Maharashtra, India</div>
-            </div>
-          </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" required></div>
+        <div class="form-group"><label>Service Required</label>
+          <select required><option value="">Select a Service</option><option>Equipment Rental</option><option>Film Production</option><option>Recording Studio</option><option>Video / Audio Editing</option><option>Sound Dubbing</option><option>Film Marketing</option><option>Casting & Talent</option><option>Event Video Coverage</option><option>Other</option></select>
         </div>
-      </div>
+        <div class="form-group"><label>Project Details</label><textarea placeholder="Tell us about your project — type, duration, dates, equipment needed…"></textarea></div>
+        <button type="submit" class="btn-submit">Send Enquiry →</button>
+        <p style="margin-top:12px;font-size:.75rem;color:#86868B">We typically respond within 2 business hours.</p>
+      </form>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ─── SERVICES ─── -->
-<section class="section" id="services">
-  <div class="container">
-    <p class="eyebrow reveal">What We Do</p>
-    <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px;">End-to-End Creative Services</h2>
-    <p class="body-lg reveal reveal-delay-2" style="max-width:520px;margin-bottom:0;">From pre-production to distribution — every stage of your creative journey, under one roof in Pune.</p>
-    <div class="services-grid" id="servicesGrid">
-      <!-- Rendered by JS from content.json -->
-      <div class="svc-card reveal"><div class="svc-icon blue">🎬</div><h3>Film Production</h3><p>Full-cycle film production for feature films, short films, documentaries, and web series. Scripts, casting, shoot, post — all handled.</p><a href="#contact" class="svc-link">Learn More →</a></div>
-      <div class="svc-card reveal reveal-delay-1"><div class="svc-icon teal">📷</div><h3>Equipment Rental</h3><p>Cinema cameras, DSLR & mirrorless, prime and zoom lenses, lighting rigs, audio gear, and the iconic 12MM Jimmy Crane on flexible plans.</p><a href="#rental" class="svc-link">See All Gear →</a></div>
-      <div class="svc-card reveal reveal-delay-2"><div class="svc-icon green">🎙️</div><h3>Recording Studio</h3><p>Professional-grade acoustic studio for song recording, voice-overs, podcasts, and audio production with expert sound engineers.</p><a href="#contact" class="svc-link">Book Studio →</a></div>
-      <div class="svc-card reveal"><div class="svc-icon orange">✂️</div><h3>Post-Production</h3><p>High-end video and audio editing suites, color grading, VFX, and sound dubbing to give your content a cinematic polish.</p><a href="#contact" class="svc-link">Learn More →</a></div>
-      <div class="svc-card reveal reveal-delay-1"><div class="svc-icon red">🎭</div><h3>Casting & Talent</h3><p>Artist management, talent promotion, acting workshops, and open auditions connecting productions with verified talent across Maharashtra.</p><a href="#contact" class="svc-link">Find Talent →</a></div>
-      <div class="svc-card reveal reveal-delay-2"><div class="svc-icon purple">📣</div><h3>Film Marketing</h3><p>Multi-platform strategy including digital, broadcast, OTT placement, theatrical distribution, and brand partnerships for independent films.</p><a href="#contact" class="svc-link">Get Reach →</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── EQUIPMENT ─── -->
-<section class="section section-alt" id="rental">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:16px;">
-      <div>
-        <p class="eyebrow reveal">Gear Up</p>
-        <h2 class="display-lg reveal reveal-delay-1" style="margin-top:14px;">World-Class Gear, Pune Rates</h2>
-        <p class="body-lg reveal reveal-delay-2" style="max-width:480px;margin-top:12px;">Professional cinema and broadcast equipment — hourly, daily, or project-based. Available Mon–Sat.</p>
-      </div>
-      <a href="#contact" class="btn btn-primary reveal">Request a Quote</a>
-    </div>
-    <div class="equip-grid" id="equipGrid">
-      <div class="equip-card reveal"><div class="equip-img">🎥</div><h4>Video Cameras</h4><p>Cinema-grade bodies for broadcast, documentary, and narrative production.</p><span class="equip-badge">Rental Available</span></div>
-      <div class="equip-card reveal reveal-delay-1"><div class="equip-img">📸</div><h4>DSLR & Mirrorless</h4><p>Full-frame bodies for indie productions and content creators.</p><span class="equip-badge">Rental Available</span></div>
-      <div class="equip-card reveal reveal-delay-2"><div class="equip-img">🏃</div><h4>GoPro & Action Cams</h4><p>Rugged action cameras for adventure shoots and POV content.</p><span class="equip-badge">Rental Available</span></div>
-      <div class="equip-card reveal reveal-delay-3"><div class="equip-img">🔭</div><h4>Prime & Zoom Lenses</h4><p>Wide-angle, standard zoom, and telephoto cinematic glass.</p><span class="equip-badge">Rental Available</span></div>
-      <div class="equip-card reveal"><div class="equip-img">🔧</div><h4>Rigs & Grips</h4><p>Camera cages, sliders, gimbals, and shoulder rigs.</p><span class="equip-badge">Rental Available</span></div>
-      <div class="equip-card reveal reveal-delay-1"><div class="equip-img">💡</div><h4>Lighting</h4><p>LED panels, fresnel lights, softboxes, and reflectors.</p><span class="equip-badge">Rental Available</span></div>
-      <div class="equip-card reveal reveal-delay-2"><div class="equip-img">🎤</div><h4>Sound Equipment</h4><p>Boom mics, lavalier kits, mixers, and wireless systems.</p><span class="equip-badge">Rental Available</span></div>
-      <div class="equip-card reveal reveal-delay-3" style="border-color:rgba(0,113,227,0.3);background:linear-gradient(135deg,#F0F7FF,#E8F2FF);">
-        <div class="equip-img" style="background:rgba(0,113,227,0.08);">🏗️</div>
-        <h4>12MM Jimmy Crane</h4>
-        <p>Flagship crane for sweeping cinematic shots and high-impact productions.</p>
-        <span class="equip-badge" style="background:rgba(0,113,227,0.15);">Signature Gear</span>
-      </div>
-    </div>
-    <!-- Technician CTA -->
-    <div class="reveal" style="margin-top:40px;background:white;border-radius:18px;padding:36px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;box-shadow:0 4px 24px rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.06);">
-      <div>
-        <h3 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:#1D1D1F;margin-bottom:6px;">Need a Technician On-Set?</h3>
-        <p style="font-size:0.9rem;color:#86868B;">Experienced camera operators, sound recordists, and lighting technicians available with every rental package.</p>
-      </div>
-      <a href="#contact" class="btn btn-primary">Hire a Technician</a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── STUDIO ─── -->
-<section class="section" id="studio">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;">
-      <div>
-        <p class="eyebrow reveal">Our Facilities</p>
-        <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px;">Studio Built for Creators</h2>
-        <p class="body-lg reveal reveal-delay-2">State-of-the-art infrastructure designed to support every aspect of audio-visual production — from a single voice-over to a full-scale feature film.</p>
-        <div class="studio-feature-list" style="margin-top:36px;">
-          <div class="sf-item reveal"><div class="sf-item-icon">🎵</div><h4>Song Recording</h4><p>Acoustically treated studio. Book by the hour for music, vocals, and background scores.</p></div>
-          <div class="sf-item reveal reveal-delay-1"><div class="sf-item-icon">✂️</div><h4>Video Editing Suite</h4><p>High-performance workstations with Premiere Pro, DaVinci Resolve, Final Cut Pro.</p></div>
-          <div class="sf-item reveal"><div class="sf-item-icon">🎚️</div><h4>Sound Dubbing</h4><p>Professional ADR and dubbing for dialogue replacement and foreign language localization.</p></div>
-          <div class="sf-item reveal reveal-delay-1"><div class="sf-item-icon">🎨</div><h4>Color Grading</h4><p>Calibrated color suite for cinematic-grade film delivery to broadcast specs.</p></div>
-          <div class="sf-item reveal"><div class="sf-item-icon">🟩</div><h4>Green Screen Stage</h4><p>Chroma key stage for VFX, virtual backgrounds, and product shoots.</p></div>
-          <div class="sf-item reveal reveal-delay-1"><div class="sf-item-icon">📡</div><h4>Live Streaming</h4><p>Multi-camera live streaming for events, digital releases, and corporate broadcasts.</p></div>
-        </div>
-      </div>
-      <div class="reveal">
-        <div style="background:linear-gradient(135deg,#1D1D1F,#2C2C2E);border-radius:24px;padding:48px 36px;color:white;text-align:center;">
-          <div style="font-size:5rem;margin-bottom:20px;opacity:0.7;">🎙️</div>
-          <h3 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:8px;">MK Recording Studio</h3>
-          <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;margin-bottom:32px;">Pune, Maharashtra, India</p>
-          <div style="background:rgba(255,255,255,0.07);border-radius:14px;padding:22px;margin-bottom:16px;text-align:left;">
-            <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Studio Hours</div>
-            <div style="font-size:1.05rem;font-weight:500;">Mon – Sat: 9:30 AM – 6:30 PM</div>
-            <div style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin-top:4px;">Sunday Closed · Advance Booking Required</div>
-          </div>
-          <div style="background:rgba(255,255,255,0.07);border-radius:14px;padding:22px;text-align:left;margin-bottom:24px;">
-            <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Phone / WhatsApp</div>
-            <div style="font-size:1.1rem;font-weight:600;color:#0071E3;">+91 98811 92236</div>
-          </div>
-          <a href="#contact" class="btn btn-white" style="width:100%;justify-content:center;">Reserve Your Slot</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── WHO WE SERVE ─── -->
-<section class="section section-alt" id="audience">
-  <div class="container">
-    <p class="eyebrow reveal">Who We Serve</p>
-    <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px;">Built for Every Creator</h2>
-    <p class="body-lg reveal reveal-delay-2" style="max-width:520px;">Whether you're a solo YouTuber or a seasoned feature filmmaker, our services scale with your ambition and budget.</p>
-    <div class="audience-strip" id="audienceStrip" style="margin-top:50px;">
-      <div class="aud-card reveal"><span class="aud-emoji">📱</span><h4>Content Creators</h4><p>Upgrade your production value with cinema cameras, pro lighting, and sound.</p></div>
-      <div class="aud-card reveal reveal-delay-1"><span class="aud-emoji">🎸</span><h4>Individual Artists</h4><p>Record your music, shoot your music videos, build a professional portfolio.</p></div>
-      <div class="aud-card reveal reveal-delay-2"><span class="aud-emoji">🎬</span><h4>Filmmakers</h4><p>From indie short to full feature — studio support, crew, and equipment at every stage.</p></div>
-      <div class="aud-card reveal reveal-delay-3"><span class="aud-emoji">🎞️</span><h4>Video Producers</h4><p>Corporate films, event coverage, brand stories — crew, gear, and studio space.</p></div>
-      <div class="aud-card reveal"><span class="aud-emoji">📣</span><h4>Ad Makers</h4><p>High-impact TVC and digital ad production for agencies, brands, and in-house teams.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── PRODUCTIONS ─── -->
-<section class="section" id="productions">
-  <div class="container">
-    <p class="eyebrow reveal">Our Work</p>
-    <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px;">Stories We've Told</h2>
-    <p class="body-lg reveal reveal-delay-2" style="max-width:520px;margin-bottom:36px;">Marathi feature films, short films, web series, and commercial advertisements — each a testament to our craft.</p>
-    <div class="prod-filter reveal">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="film">Feature Films</button>
-      <button class="filter-btn" data-filter="short">Short Films</button>
-      <button class="filter-btn" data-filter="web">Web Series</button>
-      <button class="filter-btn" data-filter="ad">Advertisements</button>
-    </div>
-    <div class="prod-grid" id="prodGrid">
-      <!-- Rendered by JS -->
-    </div>
-  </div>
-</section>
-
-<!-- ─── GALLERY ─── -->
-<section class="section section-alt" id="gallery">
-  <div class="container">
-    <p class="eyebrow reveal">Gallery</p>
-    <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 0;">Behind the Lens</h2>
-    <p class="body-lg reveal reveal-delay-2" style="max-width:520px;margin-top:12px;">Images and video clips from our productions, studio, and equipment — a window into the world of MK Studio.</p>
-    <div class="gallery-grid" id="galleryGrid">
-      <!-- Placeholder slots shown when gallery is empty -->
-      <div class="gallery-item wide"><div class="gallery-img"><span>🎬</span></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
-      <div class="gallery-item tall"><div class="gallery-img"><span>🎥</span></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
-      <div class="gallery-item"><div class="gallery-img"><span>🎙️</span></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
-      <div class="gallery-item"><div class="gallery-img"><span>✂️</span></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
-      <div class="gallery-item wide"><div class="gallery-img"><span>💡</span></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
-      <div class="gallery-item"><div class="gallery-img"><span>📸</span></div><div class="gallery-item-overlay"><span class="gallery-plus">+</span></div></div>
-    </div>
-    <div style="text-align:center;margin-top:32px;" class="reveal">
-      <p style="font-size:0.85rem;color:#86868B;">Upload your own photos and videos through the <a href="admin/index.html" style="color:#0071E3;font-weight:500;">Admin Panel</a></p>
-    </div>
-  </div>
-</section>
-
-<!-- ─── TESTIMONIALS ─── -->
-<section class="section" id="testimonials">
-  <div class="container">
-    <p class="eyebrow reveal">What Clients Say</p>
-    <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 0;">Trusted by Creators</h2>
-    <div class="testi-grid" id="testiGrid">
-      <div class="testi-card reveal"><div class="stars">★★★★★</div><p class="testi-text">"MK Studio gave our short film the cinematic look we dreamed of. The equipment was top-notch and the team's on-set support was invaluable."</p><div class="testi-author"><div class="testi-av">R</div><div><div class="testi-name">Rahul Deshmukh</div><div class="testi-role">Independent Filmmaker, Pune</div></div></div></div>
-      <div class="testi-card reveal reveal-delay-1"><div class="stars">★★★★★</div><p class="testi-text">"Renting the recording studio was seamless. Professional-grade acoustics and engineers who truly understand music. We'll be back."</p><div class="testi-author"><div class="testi-av">P</div><div><div class="testi-name">Priya Kulkarni</div><div class="testi-role">Singer-Songwriter, Mumbai</div></div></div></div>
-      <div class="testi-card reveal reveal-delay-2"><div class="stars">★★★★★</div><p class="testi-text">"Used MK Studio for three ad film shoots. The Jimmy Crane rental alone transformed our client's TVC. Professional, punctual, and fairly priced."</p><div class="testi-author"><div class="testi-av">V</div><div><div class="testi-name">Vikram Sharma</div><div class="testi-role">Creative Director, Ad Agency</div></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── CONTACT ─── -->
-<section class="section section-alt" id="contact">
-  <div class="container">
-    <div class="contact-wrap">
-      <div>
-        <p class="eyebrow reveal">Get In Touch</p>
-        <h2 class="display-lg reveal reveal-delay-1" style="margin:14px 0 16px;">Let's Create Something Extraordinary</h2>
-        <p class="body-lg reveal reveal-delay-2" style="margin-bottom:50px;">Have a project? Need equipment? Want to book a studio session? We'd love to hear from you.</p>
-        <div class="contact-detail-item reveal">
-          <div class="cd-icon">📞</div>
-          <div><div class="cd-label">Phone / WhatsApp</div><div class="cd-value">+91 98811 92236</div></div>
-        </div>
-        <div class="contact-detail-item reveal">
-          <div class="cd-icon">✉️</div>
-          <div><div class="cd-label">Email</div><div class="cd-value">info@mkstudiopune.com</div></div>
-        </div>
-        <div class="contact-detail-item reveal">
-          <div class="cd-icon">📍</div>
-          <div><div class="cd-label">Location</div><div class="cd-value">Pune, Maharashtra, India</div></div>
-        </div>
-        <div class="contact-detail-item reveal">
-          <div class="cd-icon">🕐</div>
-          <div><div class="cd-label">Studio Hours</div><div class="cd-value">Mon–Sat: 9:30 AM – 6:30 PM<br><span style="font-size:0.82rem;color:#86868B;">Sunday Closed</span></div></div>
-        </div>
-      </div>
-      <div class="contact-form reveal">
-        <h3 style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:28px;letter-spacing:-0.02em;">Send Us a Message</h3>
-        <form id="contactForm">
-          <div class="form-row">
-            <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your Name" required></div>
-            <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
-          </div>
-          <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" required></div>
-          <div class="form-group">
-            <label>Service Required</label>
-            <select required>
-              <option value="">Select a Service</option>
-              <option>Equipment Rental</option>
-              <option>Film Production</option>
-              <option>Recording Studio</option>
-              <option>Video / Audio Editing</option>
-              <option>Sound Dubbing</option>
-              <option>Film Marketing & Distribution</option>
-              <option>Casting & Talent</option>
-              <option>Event Video Coverage</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group"><label>Project Details</label><textarea placeholder="Tell us about your project — type, duration, dates, specific equipment or services needed…"></textarea></div>
-          <button type="submit" class="btn-submit">Send Enquiry →</button>
-          <p style="margin-top:12px;font-size:0.75rem;color:#86868B;">We typically respond within 2 business hours.</p>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── FOOTER ─── -->
 <footer>
   <div class="footer-grid">
-    <div>
-      <div class="footer-brand">MK<span>Studio</span></div>
-      <p style="font-size:0.7rem;color:rgba(255,255,255,0.3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;">Pune, India · Since 2008</p>
-      <p class="footer-desc">Pune's premier film studio and creative production hub — empowering filmmakers, content creators, and brands to tell stories that matter.</p>
-    </div>
-    <div class="footer-col">
-      <h5>Services</h5>
-      <ul>
-        <li><a href="#services">Film Production</a></li>
-        <li><a href="#rental">Equipment Rental</a></li>
-        <li><a href="#studio">Recording Studio</a></li>
-        <li><a href="#studio">Video Editing</a></li>
-        <li><a href="#studio">Sound Dubbing</a></li>
-        <li><a href="#services">Film Marketing</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Equipment</h5>
-      <ul>
-        <li><a href="#rental">Video Cameras</a></li>
-        <li><a href="#rental">DSLR & Mirrorless</a></li>
-        <li><a href="#rental">Prime Lenses</a></li>
-        <li><a href="#rental">Lighting Rigs</a></li>
-        <li><a href="#rental">Sound Gear</a></li>
-        <li><a href="#rental">Jimmy Crane</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Company</h5>
-      <ul>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#productions">Our Films</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="admin/index.html">Admin Panel</a></li>
-      </ul>
-    </div>
+    <div><div class="footer-brand">MK<span>Studio</span></div><p style="font-size:.7rem;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px">Pune, India · Since 2008</p><p class="footer-desc">Pune's premier film studio — empowering filmmakers, content creators, and brands to tell stories that matter.</p></div>
+    <div class="footer-col"><h5>Services</h5><ul><li><a href="#services">Film Production</a></li><li><a href="#rental">Equipment Rental</a></li><li><a href="#studio">Recording Studio</a></li><li><a href="#studio">Video Editing</a></li><li><a href="#studio">Sound Dubbing</a></li><li><a href="#services">Film Marketing</a></li></ul></div>
+    <div class="footer-col"><h5>Equipment</h5><ul><li><a href="#rental">Video Cameras</a></li><li><a href="#rental">DSLR & Mirrorless</a></li><li><a href="#rental">Prime Lenses</a></li><li><a href="#rental">Lighting Rigs</a></li><li><a href="#rental">Sound Gear</a></li><li><a href="#rental">Jimmy Crane</a></li></ul></div>
+    <div class="footer-col"><h5>Company</h5><ul><li><a href="#about">About Us</a></li><li><a href="#productions">Our Films</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li><li><a href="admin/index.html">Admin Panel</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <p class="footer-copy">© 2025 MK Studio Pune. All rights reserved. | mkstudiopune.com</p>
-    <div class="footer-socials">
-      <a href="#" class="soc-btn" title="YouTube">▶</a>
-      <a href="#" class="soc-btn" title="Instagram">◈</a>
-      <a href="#" class="soc-btn" title="Facebook">f</a>
-      <a href="#" class="soc-btn" title="WhatsApp">✆</a>
-    </div>
+    <div class="footer-socials"><a href="#" class="soc-btn">▶</a><a href="#" class="soc-btn">◈</a><a href="#" class="soc-btn">f</a><a href="#" class="soc-btn">✆</a></div>
   </div>
 </footer>
 
-<!-- ─── LIGHTBOX ─── -->
-<div class="lightbox" id="lightboxOverlay">
-  <div class="lightbox-inner" id="lightboxInner">
-    <button class="lb-close" onclick="closeLightbox()">✕</button>
-  </div>
-</div>
-
-<!-- ─── FLOATING CTA ─── -->
+<div class="lightbox" id="lightboxOverlay" onclick="closeLightbox()"><div class="lightbox-inner" id="lightboxInner"><button class="lb-close" onclick="closeLightbox()">✕</button></div></div>
 <a href="#contact" class="float-cta">📞 Book Now</a>
 
 <script src="js/main.js"></script>
+<script>
+window.addEventListener('scroll',()=>{
+  const p=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  document.getElementById('scrollProgress').style.width=p+'%';
+});
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    const f=this.dataset.filter;
+    document.querySelectorAll('.prod-card').forEach(c=>{
+      const show=f==='all'||c.dataset.cat===f;
+      c.style.display=show?'flex':'none';
+      if(show){c.style.opacity=0;setTimeout(()=>{c.style.opacity=1;c.style.transition='opacity .4s'},10);}
+    });
+  });
+});
+window.openYT=u=>u&&u!=='#'&&window.open(u,'_blank');
+</script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="120" height="120">
+  <defs>
+    <linearGradient id="bg_equipment-rental" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C7BE;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#00C7BE;stop-opacity:0.04"/>
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="14" fill="url(#bg_equipment-rental)"/>
+  <g color="#00C7BE">
+    <rect x="10" y="16" width="28" height="20" rx="4" fill="currentColor" opacity="0.15"/>
+    <rect x="10" y="16" width="28" height="20" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="24" cy="26" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="24" cy="26" r="2" fill="currentColor"/>
+    <rect x="20" y="10" width="8" height="6" rx="2" fill="currentColor" opacity="0.8"/>
+    <circle cx="36" cy="19" r="2" fill="currentColor"/>
+    <line x1="4" y1="36" x2="10" y2="36" stroke="currentColor" stroke-width="2.5"/>
+    <line x1="38" y1="36" x2="44" y2="36" stroke="currentColor" stroke-width="2.5"/>
+  </g>
+</svg>

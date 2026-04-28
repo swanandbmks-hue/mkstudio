@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="400" height="400">
+  <defs>
+    <radialGradient id="eq_bg_jimmy-crane" cx="50%" cy="40%">
+      <stop offset="0%" style="stop-color:#0071E3;stop-opacity:0.08"/>
+      <stop offset="100%" style="stop-color:#0071E3;stop-opacity:0.02"/>
+    </radialGradient>
+  </defs>
+  <rect width="300" height="300" rx="20" fill="#F8F8FC"/>
+  <rect width="300" height="300" rx="20" fill="url(#eq_bg_jimmy-crane)"/>
+  <!-- subtle grid -->
+  <pattern id="g_jimmy-crane" width="20" height="20" patternUnits="userSpaceOnUse">
+    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#0071E3" stroke-width="0.3" opacity="0.3"/>
+  </pattern>
+  <rect width="300" height="300" rx="20" fill="url(#g_jimmy-crane)"/>
+  
+    <!-- Crane arm -->
+    <line x1="40" y1="220" x2="260" y2="60" stroke="#2C2C2E" stroke-width="18" stroke-linecap="round"/>
+    <line x1="40" y1="220" x2="260" y2="60" stroke="#0071E3" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+    <!-- Counterweight -->
+    <rect x="22" y="200" width="50" height="40" rx="6" fill="#1D1D1F"/>
+    <rect x="32" y="210" width="30" height="20" rx="3" fill="#333"/>
+    <!-- Camera end -->
+    <rect x="228" y="42" width="50" height="35" rx="6" fill="#1D1D1F"/>
+    <rect x="232" y="46" width="42" height="27" rx="4" fill="#111"/>
+    <circle cx="250" cy="60" r="10" fill="#0A0A0A"/>
+    <circle cx="250" cy="60" r="7" fill="#0071E3" opacity="0.5"/>
+    <circle cx="250" cy="60" r="4" fill="#0071E3"/>
+    <!-- Head/pivot -->
+    <circle cx="150" cy="140" r="20" fill="#2C2C2E"/>
+    <circle cx="150" cy="140" r="12" fill="#0071E3" opacity="0.5"/>
+    <!-- Tripod legs -->
+    <line x1="150" y1="160" x2="100" y2="260" stroke="#2C2C2E" stroke-width="10" stroke-linecap="round"/>
+    <line x1="150" y1="160" x2="200" y2="260" stroke="#2C2C2E" stroke-width="10" stroke-linecap="round"/>
+    <line x1="150" y1="160" x2="150" y2="265" stroke="#2C2C2E" stroke-width="10" stroke-linecap="round"/>
+    <!-- Foot plates -->
+    <ellipse cx="100" cy="262" rx="16" ry="6" fill="#333"/>
+    <ellipse cx="200" cy="262" rx="16" ry="6" fill="#333"/>
+    <ellipse cx="150" cy="265" rx="16" ry="6" fill="#333"/>
+    <!-- Label -->
+    <text x="150" y="290" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#0071E3" letter-spacing="2" font-weight="600">12MM JIMMY CRANE</text>
+  
+</svg>

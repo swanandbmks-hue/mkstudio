@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="400" height="400">
+  <defs>
+    <radialGradient id="eq_bg_rigs-grips" cx="50%" cy="40%">
+      <stop offset="0%" style="stop-color:#FF3B30;stop-opacity:0.08"/>
+      <stop offset="100%" style="stop-color:#FF3B30;stop-opacity:0.02"/>
+    </radialGradient>
+  </defs>
+  <rect width="300" height="300" rx="20" fill="#F8F8FC"/>
+  <rect width="300" height="300" rx="20" fill="url(#eq_bg_rigs-grips)"/>
+  <!-- subtle grid -->
+  <pattern id="g_rigs-grips" width="20" height="20" patternUnits="userSpaceOnUse">
+    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#FF3B30" stroke-width="0.3" opacity="0.3"/>
+  </pattern>
+  <rect width="300" height="300" rx="20" fill="url(#g_rigs-grips)"/>
+  
+    <!-- Cage top bar -->
+    <rect x="60" y="60" width="180" height="12" rx="6" fill="#2C2C2E"/>
+    <!-- Side rails -->
+    <rect x="60" y="60" width="12" height="160" rx="6" fill="#2C2C2E"/>
+    <rect x="228" y="60" width="12" height="160" rx="6" fill="#2C2C2E"/>
+    <!-- Cross bars -->
+    <rect x="72" y="100" width="156" height="8" rx="4" fill="#333"/>
+    <rect x="72" y="140" width="156" height="8" rx="4" fill="#333"/>
+    <rect x="72" y="180" width="156" height="8" rx="4" fill="#333"/>
+    <!-- Camera mount plate -->
+    <rect x="95" y="108" width="110" height="70" rx="4" fill="#1D1D1F"/>
+    <rect x="105" y="118" width="90" height="50" rx="3" fill="#111"/>
+    <!-- Handle -->
+    <rect x="130" y="50" width="40" height="20" rx="10" fill="#FF3B30"/>
+    <rect x="142" y="48" width="16" height="12" rx="3" fill="#CC2020"/>
+    <!-- Screw holes -->
+    <circle cx="80" cy="80" r="5" fill="#111"/>
+    <circle cx="220" cy="80" r="5" fill="#111"/>
+    <circle cx="80" cy="200" r="5" fill="#111"/>
+    <circle cx="220" cy="200" r="5" fill="#111"/>
+    <!-- NATO rail -->
+    <rect x="72" y="60" width="156" height="12" rx="0" fill="none" stroke="#FF3B30" stroke-width="1.5" opacity="0.5"/>
+  
+</svg>
