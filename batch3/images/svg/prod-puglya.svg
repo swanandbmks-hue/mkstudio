@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <defs>
+    <linearGradient id="g_puglya" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B5E20"/>
+      <stop offset="100%" style="stop-color:#388E3C"/>
+    </linearGradient>
+    <linearGradient id="ov_puglya" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0.1"/>
+      <stop offset="60%" style="stop-color:#000000;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.85"/>
+    </linearGradient>
+    <filter id="bl_puglya"><feGaussianBlur stdDeviation="35"/></filter>
+    <filter id="ts_puglya">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.6)"/>
+    </filter>
+    <clipPath id="clip_puglya"><rect width="640" height="360"/></clipPath>
+  </defs>
+  <rect width="640" height="360" fill="url(#g_puglya)"/>
+  
+  <!-- Blurred bg orbs -->
+  <circle cx="160" cy="120" r="200" fill="#388E3C" opacity="0.25" filter="url(#bl_puglya)"/>
+  <circle cx="520" cy="280" r="180" fill="#1B5E20" opacity="0.3" filter="url(#bl_puglya)"/>
+  
+  <!-- Film grain texture -->
+  <pattern id="grain_puglya" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
+    <rect x="0" y="0" width="1.5" height="1.5" fill="white" opacity="0.02"/>
+  </pattern>
+  <rect width="640" height="360" fill="url(#grain_puglya)"/>
+  
+  <!-- Bottom gradient overlay -->
+  <rect width="640" height="360" fill="url(#ov_puglya)"/>
+  
+  <!-- Left film perforations -->
+  <rect x="0" y="0" width="28" height="360" fill="black" opacity="0.45"/>
+  <line x1="29" y1="0" x2="29" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <rect x="7" y="16" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="7" y="50" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="7" y="84" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="7" y="118" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="7" y="152" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="7" y="186" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="7" y="220" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="7" y="254" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="7" y="288" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="7" y="322" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/>
+  
+  <!-- Right film perforations -->
+  <rect x="612" y="0" width="28" height="360" fill="black" opacity="0.45"/>
+  <line x1="611" y1="0" x2="611" y2="360" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <rect x="619" y="16" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="619" y="50" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="619" y="84" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="619" y="118" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="619" y="152" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="619" y="186" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="619" y="220" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="619" y="254" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="619" y="288" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="619" y="322" width="14" height="20" rx="2" fill="rgba(255,255,255,0.18)"/>
+  
+  <!-- MK Studio badge top -->
+  <rect x="38" y="12" width="130" height="22" rx="11" fill="rgba(255,255,255,0.12)"/>
+  <text x="103" y="27" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.8)" letter-spacing="2" font-weight="700">MK STUDIO PUNE</text>
+  
+  <!-- Language & year top right -->
+  <text x="600" y="24" text-anchor="end" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.55)" letter-spacing="2">MARATHI · 2018</text>
+  
+  <!-- Big decorative icon -->
+  <text x="540" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="88" opacity="0.1">🎭</text>
+  
+  <!-- Type pill -->
+  <rect x="38" y="240" width="104" height="22" rx="11" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="90" y="255" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.9)" letter-spacing="1.5" font-weight="700">FEATURE FILM</text>
+  
+  <!-- Genre -->
+  <text x="38" y="288" font-family="system-ui,sans-serif" font-size="10" fill="rgba(255,255,255,0.55)" letter-spacing="1.5">DRAMA</text>
+  
+  <!-- Main title -->
+  <text x="38" y="330" font-family="system-ui,sans-serif" font-size="38" fill="white" font-weight="800" letter-spacing="-0.5" filter="url(#ts_puglya)">PUGLYA</text>
+  
+  <!-- Director -->
+  <text x="38" y="350" font-family="system-ui,sans-serif" font-size="9.5" fill="rgba(255,255,255,0.5)" letter-spacing="1">DIR. VIN PETER</text>
+  
+  <!-- Cast -->
+  <text x="38" y="345" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,0.4)" letter-spacing="0.5">–</text>
+  
+  <!-- Play circle -->
+  <circle cx="570" cy="180" r="32" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  <polygon points="563,168 563,192 587,180" fill="rgba(255,255,255,0.85)"/>
+  
+  <!-- Marathi title (subtle) -->
+  <text x="600" y="345" text-anchor="end" font-family="system-ui,sans-serif" font-size="11" fill="rgba(255,255,255,0.25)">पुग्ल्या</text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <linearGradient id="logo_g" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0071E3"/>
+      <stop offset="100%" style="stop-color:#00C7BE"/>
+    </linearGradient>
+  </defs>
+  <!-- M -->
+  <text x="4" y="46" font-family="system-ui,sans-serif" font-size="48" font-weight="900" fill="url(#logo_g)" letter-spacing="-2">MK</text>
+  <!-- STUDIO text -->
+  <text x="80" y="32" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#1D1D1F" letter-spacing="4">STUDIO</text>
+  <!-- Pune text -->
+  <text x="80" y="48" font-family="system-ui,sans-serif" font-size="10" font-weight="400" fill="#86868B" letter-spacing="3">PUNE</text>
+  <!-- Camera aperture icon -->
+  <circle cx="185" cy="30" r="14" fill="none" stroke="url(#logo_g)" stroke-width="2"/>
+  <circle cx="185" cy="30" r="8" fill="url(#logo_g)" opacity="0.3"/>
+  <circle cx="185" cy="30" r="4" fill="url(#logo_g)"/>
+  <line x1="185" y1="16" x2="185" y2="44" stroke="url(#logo_g)" stroke-width="1" opacity="0.4"/>
+  <line x1="171" y1="30" x2="199" y2="30" stroke="url(#logo_g)" stroke-width="1" opacity="0.4"/>
+</svg>

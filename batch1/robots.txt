@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mkstudiopune.com/sitemap.xml
+
+Disallow: /admin/
+Disallow: /data/

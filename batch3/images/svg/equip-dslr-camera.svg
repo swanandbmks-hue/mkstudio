@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="400" height="400">
+  <defs>
+    <radialGradient id="eq_bg_dslr-camera" cx="50%" cy="40%">
+      <stop offset="0%" style="stop-color:#34C759;stop-opacity:0.08"/>
+      <stop offset="100%" style="stop-color:#34C759;stop-opacity:0.02"/>
+    </radialGradient>
+  </defs>
+  <rect width="300" height="300" rx="20" fill="#F8F8FC"/>
+  <rect width="300" height="300" rx="20" fill="url(#eq_bg_dslr-camera)"/>
+  <!-- subtle grid -->
+  <pattern id="g_dslr-camera" width="20" height="20" patternUnits="userSpaceOnUse">
+    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#34C759" stroke-width="0.3" opacity="0.3"/>
+  </pattern>
+  <rect width="300" height="300" rx="20" fill="url(#g_dslr-camera)"/>
+  
+    <!-- Body -->
+    <rect x="70" y="90" width="160" height="120" rx="10" fill="#1D1D1F"/>
+    <!-- Pentaprism hump -->
+    <path d="M110 90 L130 65 L170 65 L190 90 Z" fill="#2C2C2E"/>
+    <!-- Lens -->
+    <circle cx="155" cy="150" r="50" fill="#0A0A0A"/>
+    <circle cx="155" cy="150" r="42" fill="#111"/>
+    <circle cx="155" cy="150" r="30" fill="#1C1C1E"/>
+    <circle cx="155" cy="150" r="20" fill="#222"/>
+    <circle cx="155" cy="150" r="10" fill="#34C759" opacity="0.6"/>
+    <circle cx="144" cy="139" r="7" fill="white" opacity="0.15"/>
+    <!-- Lens rings -->
+    <circle cx="155" cy="150" r="48" fill="none" stroke="#333" stroke-width="2"/>
+    <circle cx="155" cy="150" r="36" fill="none" stroke="#333" stroke-width="1.5"/>
+    <!-- Grip -->
+    <rect x="220" y="100" width="25" height="80" rx="8" fill="#2C2C2E"/>
+    <!-- Flash -->
+    <rect x="120" y="68" width="30" height="8" rx="2" fill="#333"/>
+    <!-- Shutter -->
+    <rect x="200" y="75" width="20" height="12" rx="3" fill="#34C759" opacity="0.7"/>
+    <!-- Screen -->
+    <rect x="72" y="95" width="55" height="42" rx="4" fill="#111"/>
+    <rect x="75" y="98" width="49" height="36" rx="2" fill="#0A2010"/>
+    <text x="99" y="118" text-anchor="middle" font-family="monospace" font-size="8" fill="#34C759">REC</text>
+  
+</svg>
